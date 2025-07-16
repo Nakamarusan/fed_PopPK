@@ -1,0 +1,21 @@
+# Dockerfile.base
+FROM rocker/verse:4.5.1
+
+# 1) remotes & renv pinned
+RUN R -e "install.packages('remotes', repos='https://cloud.r-project.org')" && \
+    R -e "remotes::install_version('remotes', version='2.4.2', repos='https://cloud.r-project.org')" && \
+    R -e "remotes::install_version('renv',    version='1.1.4', repos='https://cloud.r-project.org')"
+
+# 2) set a working directory
+WORKDIR /project
+
+# 3) copy lockfile and renv settings into the *correct* locations
+COPY renv.lock ./          
+COPY .Rprofile ./          
+COPY renv/activate.R renv/activate.R  
+
+# 4) restore packages
+ENV R_PROFILE_USER=/project/.Rprofile
+ENV RENV_CONFIG_SANDBOX_ENABLED=FALSE
+
+RUN Rscript -e "source('/project/.Rprofile'); options(renv.consent=TRUE, Ncpus=parallel::detectCores()); renv::restore(prompt=FALSE)"

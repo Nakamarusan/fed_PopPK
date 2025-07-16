@@ -4452,6 +4452,12 @@
       "Maintainer": "Lionel Henry <lionel@posit.co>",
       "Repository": "RSPM"
     },
+    "plumber": {
+      "Package": "plumber",
+      "Version": "1.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
     "png": {
       "Package": "png",
       "Version": "0.1-8",

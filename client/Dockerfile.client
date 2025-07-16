@@ -1,0 +1,22 @@
+# Dockerfile.client
+FROM fedpoppk/r-ver:0.1.0
+
+WORKDIR /project
+
+# 1) renv 設定ファイルを先にコピー
+COPY renv.lock .Rprofile renv/activate.R ./
+
+# 2) サンドボックスを無効化してプロジェクトライブラリに復元
+ENV R_PROFILE_USER=/project/.Rprofile \
+    RENV_CONFIG_SANDBOX_ENABLED=FALSE
+
+RUN Rscript -e "options(renv.consent=TRUE, Ncpus=parallel::detectCores()); \
+                renv::restore(prompt=FALSE)"
+
+# 3) アプリケーションコードをコピー
+COPY client/R/ R/
+
+# 4) マウント先ディレクトリを作成
+RUN mkdir -p /project/configs /project/data
+
+# 5) ENTRYPOINT／COMMAND は compose か Dockerfile.server 側で定義

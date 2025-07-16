@@ -1,0 +1,22 @@
+# Dockerfile.server
+FROM fedpoppk/r-ver:0.1.0
+
+WORKDIR /project
+
+# 1) renv 設定ファイルを先にコピー
+COPY renv.lock .Rprofile renv/activate.R ./
+
+# 2) サンドボックス無効化＆プロジェクトライブラリ復元
+ENV R_PROFILE_USER=/project/.Rprofile \
+    RENV_CONFIG_SANDBOX_ENABLED=FALSE
+
+RUN Rscript -e "options(renv.consent=TRUE, Ncpus=parallel::detectCores()); \
+                renv::restore(prompt=FALSE)"
+
+# 3) サーバーコードを配置
+COPY server/R/ R/
+
+# 4) マウント用ディレクトリ
+RUN mkdir -p /project/configs
+
+# ENTRYPOINT は docker-compose.yml で指定
