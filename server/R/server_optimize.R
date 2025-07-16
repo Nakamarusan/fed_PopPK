@@ -1,0 +1,65 @@
+# R/server_optimize.R
+
+# Dependencies
+# install.packages(c("nloptr","logger"))
+library(nloptr)
+library(logger)
+#' Run federated optimization on server
+#'
+#' @param init_par  Numeric vector of initial parameters (unconstrained)
+#' @param client_urls Character vector of client endpoints
+#' @param payload_base Named list of other fields to include in payload (e.g. modelInfo)
+#' @param opts      List of nloptr options (see ?nloptr::nloptr)
+#' @param comm_fn   Function to call clients (default poll_clients)
+#' @param agg_fn    Function to aggregate responses (default aggregate_responses)
+#' @return A list with
+#'   - par     : optimized parameters
+#'   - value   : final objective
+#'   - convergence : status code from optimizer
+server_optimize <- function(init_par,
+                            client_urls,
+                            payload_base = list(),
+                            opts = list(
+                              algorithm    = "NLOPT_LD_LBFGS",
+                              maxeval      = 100,
+                              xtol_rel     = 1e-6
+                            ),
+                            comm_fn = poll_clients,
+                            agg_fn  = aggregate_responses) {
+  # wrapper for nloptr
+  eval_grad_fn <- function(p) {
+    # build payload with parameters
+    payload <- c(
+      payload_base,
+      list(params = p)
+    )
+
+    # 1) obtain list of {objf, grad} from clients
+    responses <- comm_fn(client_urls, payload,
+                         timeout   = opts$timeout     %||% 30,
+                         max_tries = opts$max_tries   %||% 3,
+                         pause     = opts$pause       %||% 1)
+
+    # 2) aggregate
+    agg    <- agg_fn(responses)
+    obj    <- agg$objf
+    grad   <- agg$grad
+
+    # nloptr expects list( objective, gradient )
+    list("objective" = obj, "gradient" = grad)
+  }
+
+  # call nloptr
+  res <- nloptr::nloptr(
+    x0         = init_par,
+    eval_f     = function(x) eval_grad_fn(x)$objective,
+    eval_grad_f= function(x) eval_grad_fn(x)$gradient,
+    opts       = opts
+  )
+
+  list(
+    par         = res$solution,
+    value       = res$objective,
+    convergence = res$status
+  )
+}
