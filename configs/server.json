@@ -1,8 +1,6 @@
 {
-  "clients": [
-    "http://client:8000/run"
-  ],
-
+  "clients": ["http://client:8000/run"]
+  ,
   "initPar": {
     "tcl": 0.0,
     "tv": 0.0,

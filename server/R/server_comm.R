@@ -29,7 +29,7 @@ send_to_client <- function(url,
   body_json <- toJSON(payload, auto_unbox = TRUE)
 
   # 2) call `/compute` path
-  endpoint <- paste0(url, "/compute")
+  endpoint <- url
 
   # 3) retry logic via httr::RETRY()
   resp <- tryCatch({

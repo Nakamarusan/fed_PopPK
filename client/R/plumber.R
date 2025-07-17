@@ -1,4 +1,6 @@
 # plumber.R
+print(getwd())
+print(list.files())
 
 library(plumber)
 library(jsonlite)
@@ -83,7 +85,7 @@ function(req, res) {
 
 # Plumber サーバーの起動
 # このファイルを Rscript で直接叩くと以下が実行される
-if (!interactive()) {
-  pr <- plumb("plumber.R")
-  pr$run(host = "0.0.0.0", port = 8000)
-}
+# if (!interactive()) {
+#   pr <- plumb("plumber.R")   # 再帰させない
+#   pr$run(host = "0.0.0.0", port = 8000)
+# }

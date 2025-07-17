@@ -29,10 +29,10 @@ if (is.null(opts$config) || !nzchar(opts$config)) {
 }
 
 # Load internal modules
-source("R/server_comm.R",      chdir = TRUE)
-source("R/server_objective.R", chdir = TRUE)
-source("R/server_optimize.R",  chdir = TRUE)
-source("R/server_run.R",       chdir = TRUE)
+source("/project/R/server_comm.R")
+source("/project/R/server_objective.R")
+source("/project/R/server_optimize.R")
+source("/project/R/server_run.R")
 
 # Run
 log_info("Starting server run with config={config}", config = opts$config)

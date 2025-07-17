@@ -1,39 +1,40 @@
+# docker‑compose.yml
 services:
   client:
-    image: fedpoppk/client:0.1.0
-    working_dir: /project
+    build:
+      dockerfile: client/Dockerfile.client
+    working_dir: /project/R
     networks:
-      - fednet
+      - fednet         
     volumes:
       - ./configs/client1.json:/project/configs/client.json:ro
-      - ./configs/data1_5.csv:/project/data/data.csv:ro
+      - ./client/data/data1_5.csv:/project/data/data.csv:ro
     ports:
       - "8000:8000"
     entrypoint:
       - Rscript
       - -e
-      - >-
-        options(renv.config.autoloader.enabled=FALSE);
-        plumber::plumb('R/plumber.R')$
-          run(host='0.0.0.0', port=as.integer(Sys.getenv("PORT", 8000)))
+      - |
+        plumber::plumb('plumber.R')$
+          run(host='0.0.0.0', port=8000)
     environment:
       - PORT=8000
 
   server:
-    image: fedpoppk/server:0.1.0
-    working_dir: /project
+    build:
+      dockerfile: server/Dockerfile.server
+    working_dir: /project/R
+    networks:
+      - fednet              
     depends_on:
       - client
-    networks:
-      - fednet
     volumes:
       - ./configs/server.json:/project/configs/server.json:ro
     entrypoint:
       - Rscript
-      - -e
-      - >-
-        options(renv.config.autoloader.enabled=FALSE);
-        source('R/server_main.R')
+      - server_main.R
+      - --config
+      - /project/configs/server.json
 
 networks:
   fednet:
