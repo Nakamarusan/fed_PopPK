@@ -1,43 +1,40 @@
-# R/server_objective.R
+# ── server_objective.R ───────────────────────────────────────────────────────
+# 目的  : すべてのクライアントが返した “部分目的関数 & 勾配” を
+#         単純加算（＝完全データ対数尤度の合計）で集計する。
+# 期待値: 各クライアントは
+#           list(objf = <numeric(1)>, grad = <numeric(k)>)
+#         を返す。k はパラメータ数で全施設で共通。
 
-#' Aggregate client results into global objective and gradient
-#'
-#' @param responses List of client responses. Each element is a list with
-#'   - objf: numeric scalar (–2LL or objective contribution)
-#'   - grad: numeric vector of the same length across clients
-#' @return A list with
-#'   - objf: sum of all clients’ objf
-#'   - grad: sum of all clients’ grad (element‐wise)
-#' @export
 aggregate_responses <- function(responses) {
-  if (!is.list(responses) || length(responses) == 0) {
-    stop("`responses` must be a non-empty list")
-  }
+  ## 0) 基本チェック ---------------------------------------------------------
+  stopifnot(
+    is.list(responses),
+    length(responses) > 0,
+    !is.null(names(responses))         # URL を名前にしているはず
+  )
 
-  # Extract all objf values and grads
-  obj_vals <- vapply(responses, function(r) {
-    if (!is.numeric(r$objf) || length(r$objf) != 1) {
+  ## 1) objf と grad を抽出 & 妥当性確認 -----------------------------------
+  obj_vec <- vapply(responses, \(r){
+    if (!is.numeric(r$objf) || length(r$objf) != 1L)
       stop("Each response$objf must be a numeric scalar")
-    }
     r$objf
   }, numeric(1))
 
-  grads <- lapply(responses, function(r) {
-    if (!is.numeric(r$grad)) {
-      stop("Each response$grad must be numeric")
-    }
+  grad_list <- lapply(responses, \(r){
+    if (!is.numeric(r$grad))
+      stop("Each response$grad must be a numeric vector")
     r$grad
   })
 
-  # Check that all grads have the same length
-  lengths <- vapply(grads, length, integer(1))
-  if (length(unique(lengths)) != 1) {
-    stop("All `grad` vectors must have the same length")
-  }
+  ## 2) 勾配長が全施設で一致するか？ --------------------------------------
+  g_len <- vapply(grad_list, length, integer(1))
+  if (!all(g_len == g_len[1]))
+    stop("All gradient vectors must have identical length (got: ",
+         paste(g_len, collapse = ","), ")")
 
-  # Sum them
-  objf_sum <- as.numeric(sum(obj_vals))
-  grad_sum <- as.numeric(Reduce(`+`, grads))
-
-  list(objf = objf_sum, grad = grad_sum)
+  ## 3) 集約 (単純総和) ------------------------------------------------------
+  list(
+    objf = sum(obj_vec),
+    grad = Reduce(`+`, grad_list)
+  )
 }

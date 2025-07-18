@@ -1,43 +1,56 @@
-# R/compute_obj_grad.R
-library(nlmixr2)
-library(numDeriv)
+# compute_obj_grad.R
 
-#' Compute objective and gradient for one client
+suppressPackageStartupMessages({
+  library(rxode2)
+  library(nlmixr2)
+  library(numDeriv)
+})
+
+#' Compute FOCEi objective & numeric gradient for one client
 #'
-#' @param p     Named numeric vector of parameters.
-#'              Names must match iniDf$name or compiled slots.
-#' @param model An rxUi or rxModel object.
-#' @param dt    A data.table containing this client's data.
-#' @return A list with elements:
-#'   - obj:  Numeric, the client's objective (–2LL)
-#'   - grad: Numeric vector, gradient ∂obj/∂p (may contain NA)
-compute_obj_grad <- function(p, model, dt) {
-  # 1) Update model parameters (rxUi or rxModel handled)
-  mdl_p <- update_model_params(model, as.list(p))
+#' @param p          named numeric vector of unconstrained parameters
+#' @param model_info list, construct_model_from_JSON() に渡す modelInfo
+#' @param dt         data.table: このクライアントの観測データ
+#' @return list(objf, grad)
+compute_obj_grad <- function(p, model_info, dt) {
+  message("\n=== compute_obj_grad: names(p) ===")
+  print(names(p))
+  # 1) rxUi を p で再構築
+  ui_p <- construct_model_from_JSON(
+    model_info,
+    init_par = as.list(p)
+  )
 
-  # 2) FOCEI run with nlmixr2 (compiles internally if needed)
-  fit     <- nlmixr2::nlmixr(
-    mdl_p, dt,
+  # 2) FOCEi 目的関数評価
+  fit <- nlmixr2(
+    ui_p, dt,
     est     = "focei",
-    control = foceiControl(maxOuterIterations = 0, print = 0)
-  )
-  obj_val <- as.numeric(fit$objDf["FOCEi", "OBJF"])
-
-  # 3) Numeric gradient via central differences
-  obj_fun <- function(x) {
-    mdl_x <- update_model_params(model, as.list(setNames(x, names(p))))
-    ff    <- nlmixr2::nlmixr(
-      mdl_x, dt,
-      est     = "focei",
-      control = foceiControl(maxOuterIterations = 0, print = 0)
+    control = foceiControl(
+      maxOuterIterations = 0,
+      maxInnerIterations = 0,
+      print = 0
     )
-    ff$objDf["FOCEi", "OBJF"]
-  }
-  grad_val <- tryCatch(
-    numDeriv::grad(obj_fun, p),
-    error = function(e) rep(NA_real_, length(p))
   )
+  objf <- as.numeric(fit$objDf["FOCEi", "OBJF"])
 
-  list(obj  = obj_val,
-       grad = grad_val)
+  # 3) 数値勾配
+  obj_fun <- function(par) {
+    ui_inner <- construct_model_from_JSON(
+      model_info,
+      init_par = as.list(setNames(par, names(p)))
+    )
+    fit_i <- nlmixr2(
+      ui_inner, dt,
+      est     = "focei",
+      control = foceiControl(
+        maxOuterIterations = 0,
+        maxInnerIterations = 0,
+        print = 0
+      )
+    )
+    as.numeric(fit_i$objDf["FOCEi", "OBJF"])
+  }
+  grad <- numDeriv::grad(obj_fun, p)
+
+  list(objf = objf, grad = grad)
 }

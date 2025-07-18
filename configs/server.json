@@ -1,8 +1,8 @@
 {
-  "clients": ["http://client:8000/run"]
-  ,
-  "dataPath": "/project/data/data.csv"
-  ,
+  "clients": {
+    "http://client1:8001": "/project/data/data1_1.csv",
+    "http://client2:8002": "/project/data/data1_2.csv"
+  },
   "modelInfo": {
     "compartment": "1cmt",
     "administration":"iv",
@@ -17,9 +17,5 @@
     "z_rho_clv":    0.6,
     "log_sd_sigma": 0.15 
   },
-  "optimControl": {
-    "algorithm":  "NLOPT_LD_LBFGS", 
-    "maxeval":    100,
-    "xtol_rel":   1e-6
-  }
+  "optimControl": { "algorithm": "NLOPT_LD_LBFGS", "maxeval": 100 }
 }

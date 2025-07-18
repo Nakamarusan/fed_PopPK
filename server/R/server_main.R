@@ -1,45 +1,39 @@
-#!/usr/bin/env Rscript
 # server_main.R
 
-suppressPackageStartupMessages({
-  library(optparse)
-  library(jsonlite)
-  library(logger)
-})
+# ① 通信ヘルパー＆設定パーサ読込
+source("server_comm.R")
+source("server_config.R")
+source("server_optimize.R")
+library(jsonlite)
+library(logger)
 
-# Define command‐line options
-option_list <- list(
-  make_option(c("-c","--config"),
-              type    = "character",
-              help    = "Path to config JSON",
-              metavar = "FILE"),
-  make_option(c("-m","--max-iter"),
-              type    = "integer",
-              default = NA,
-              help    = "Override maxeval",
-              metavar = "N")
+# ② server.json／CLI から設定をロード
+cfg <- parse_and_load_config()
+# cfg$clients      : named vector baseURL → dataPath
+# cfg$modelInfo    : list(compartment, administration, iiv, res)
+# cfg$initPar      : named list of initial parameters
+# cfg$optimControl : list(nloptr オプション)
+# cfg$max_iter     : integer
+
+# ③ クライアントが立ち上がるまで少し待機
+Sys.sleep(5)
+
+# ④ /init を一度だけ実行
+send_init(
+  client_map = cfg$clients,
+  modelInfo  = cfg$modelInfo,
+  initPar    = cfg$initPar
 )
 
-# Parse arguments
-opt_parser <- OptionParser(option_list = option_list)
-opts       <- parse_args(opt_parser)
-
-if (is.null(opts$config) || !nzchar(opts$config)) {
-  stop("Please specify --config <path>")
-}
-
-# Load internal modules
-source("/project/R/server_comm.R")
-source("/project/R/server_objective.R")
-source("/project/R/server_optimize.R")
-source("/project/R/server_run.R")
-
-# Run
-log_info("Starting server run with config={config}", config = opts$config)
-res <- run_server_from_config(opts$config, opts$`max-iter`)
-
-# Emit JSON result to stdout
-cat(
-  toJSON(res, auto_unbox = TRUE, digits = 10),
-  "\n"
+# ⑤ federated L-BFGS 最適化
+res <- server_optimize(
+  init_par    = unlist(cfg$initPar),
+  client_map  = cfg$clients,
+  common_info = list(modelInfo = cfg$modelInfo),
+  opts        = cfg$optimControl,
+  comm_fn     = poll_clients,
+  agg_fn      = aggregate_responses
 )
+
+# ⑥ 結果を出力
+cat(toJSON(res, auto_unbox = TRUE, digits = 10))
