@@ -24,7 +24,7 @@ run_server_from_config <- function(config_path, max_iter_override = NULL) {
 
   # 4) Call the optimization engine
   server_optimize(
-    init_par     = unlist(cfg$initPar),
+    init_par     = as.numeric(unlist(cfg$initPar)),
     client_urls  = cfg$clients,
     payload_base = cfg[setdiff(names(cfg), "clients")],
     opts         = cfg$optimControl

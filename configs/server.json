@@ -1,13 +1,21 @@
 {
   "clients": ["http://client:8000/run"]
   ,
+  "dataPath": "/project/data/data.csv"
+  ,
+  "modelInfo": {
+    "compartment": "1cmt",
+    "administration":"iv",
+    "iiv": {"cl": true, "v": true },
+    "res": "prop"
+  },
   "initPar": {
-    "tcl": 0.0,
-    "tv": 0.0,
-    "log_var_cl":  -3.0,
-    "log_var_v":   -3.0,
-    "z_rho_clv":    0.0,
-    "log_sd_sigma": 0.0 
+    "tcl": 2.3,
+    "tv": 10.0,
+    "log_var_cl":  0.15,
+    "log_var_v":   0.15,
+    "z_rho_clv":    0.6,
+    "log_sd_sigma": 0.15 
   },
   "optimControl": {
     "algorithm":  "NLOPT_LD_LBFGS", 

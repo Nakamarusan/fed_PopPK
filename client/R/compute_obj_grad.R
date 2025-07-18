@@ -21,7 +21,7 @@ compute_obj_grad <- function(p, model, dt) {
     est     = "focei",
     control = foceiControl(maxOuterIterations = 0, print = 0)
   )
-  obj_val <- fit$objDf["FOCEi", "OBJF"]
+  obj_val <- as.numeric(fit$objDf["FOCEi", "OBJF"])
 
   # 3) Numeric gradient via central differences
   obj_fun <- function(x) {

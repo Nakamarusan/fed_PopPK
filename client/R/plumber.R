@@ -80,7 +80,7 @@ function(req, res) {
 
   # 5) 正常レスポンス
   res$status <- 200
-  list(objf = cg$obj, grad = cg$grad)
+  list(obj = cg$obj, grad = cg$grad)
 }
 
 # Plumber サーバーの起動

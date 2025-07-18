@@ -36,8 +36,8 @@ aggregate_responses <- function(responses) {
   }
 
   # Sum them
-  objf_sum <- sum(obj_vals)
-  grad_sum <- Reduce(`+`, grads)
+  objf_sum <- as.numeric(sum(obj_vals))
+  grad_sum <- as.numeric(Reduce(`+`, grads))
 
   list(objf = objf_sum, grad = grad_sum)
 }
