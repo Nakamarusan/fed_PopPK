@@ -1,6 +1,7 @@
 suppressPackageStartupMessages({
   library(rxode2)
   library(nlmixr2lib)
+  library(nlmixr2)
 })
 
 #' Convert `modelInfo` + (optional) `init_par` to an **rxUi** object
@@ -36,6 +37,9 @@ construct_model_from_JSON <- function(model_info, init_par = NULL) {
   )
   if (length(eta_pars)) {
     mdl <- mdl |> addEta(eta_pars)
+    if (isTRUE(model_info$iiv$cor)) {
+    mdl <- mdl |> ini(etaLcl + etaLvc ~ c(0.1, 0.2, 0.1))
+  }
   }
 
   ## ❹ add residual error
@@ -46,7 +50,9 @@ construct_model_from_JSON <- function(model_info, init_par = NULL) {
     mix  = c("addSd","propSd")
   )
   mdl <- mdl |> addResErr(err_slots)
-
+  # debug
+  print(nlmixr2(mdl))
+  print(mdl$iniDf)
   ## ❺ overwrite ini parameters, if any
   if (!is.null(init_par)) {
     # 数値ベクトルならリストに変換

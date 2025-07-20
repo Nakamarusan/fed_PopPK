@@ -1,9 +1,14 @@
 # server_main.R
 
 # ① 通信ヘルパー＆設定パーサ読込
-source("server_comm.R")
-source("server_config.R")
-source("server_optimize.R")
+# RPC ヘルパー
+source("server_comm.R",       chdir = TRUE)
+# 目的関数集約
+source("server_objective.R",  chdir = TRUE)
+# 全体最適化ループ
+source("server_optimize.R",   chdir = TRUE)
+source("server_objective.R",   chdir = TRUE) 
+source("server_config.R",   chdir = TRUE) 
 library(jsonlite)
 library(logger)
 

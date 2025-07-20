@@ -13,7 +13,7 @@ source("server_comm.R",       chdir = TRUE)
 source("server_objective.R",  chdir = TRUE)
 # 全体最適化ループ
 source("server_optimize.R",   chdir = TRUE)
-
+source("server_objective.R",   chdir = TRUE) 
 #' JSON 設定を読み込んでフェデレーション最適化を実行
 #'
 #' @param config_path Path to the JSON file from orchestrator
