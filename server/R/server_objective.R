@@ -20,12 +20,13 @@ aggregate_responses <- function(responses) {
     r$objf
   }, numeric(1))
 
-  grad_list <- lapply(responses, \(r){
-    if (!is.numeric(r$grad))
-      stop("Each response$grad must be a numeric vector")
-    r$grad
+  grad_list <- lapply(responses, function(r) {
+    g <- r$grad
+    if (!is.numeric(g)) stop("Each response$grad must be numeric")
+    as.numeric(unlist(g))  # ★★ ここを追加 ★★
   })
-
+  log_info("Aggregated objf = %f", sum(obj_vec))
+  log_info("Aggregated grad = %s", paste(round(Reduce(`+`, grad_list), 4), collapse = ", "))
   ## 2) 勾配長が全施設で一致するか？ --------------------------------------
   g_len <- vapply(grad_list, length, integer(1))
   if (!all(g_len == g_len[1]))

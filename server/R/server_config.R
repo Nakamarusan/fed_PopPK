@@ -41,9 +41,10 @@ load_server_config <- function(path) {
 parse_and_load_config <- function() {
   args <- parse_server_args()
   cfg  <- load_server_config(args$config_path)
-
+  str(cfg$clients)
   # ── clients を named character vector に変換 ──────────────
   clients_vec <- unlist(cfg$clients, use.names = TRUE)
+  print(clients_vec)
 
   list(
     clients      = clients_vec,

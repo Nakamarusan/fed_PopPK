@@ -1,7 +1,10 @@
 {
   "clients": {
     "http://client1:8001": "/project/data/data1_1.csv",
-    "http://client2:8002": "/project/data/data1_2.csv"
+    "http://client2:8002": "/project/data/data1_2.csv",
+    "http://client3:8003": "/project/data/data1_3.csv",
+    "http://client4:8004": "/project/data/data1_4.csv",
+    "http://client5:8005": "/project/data/data1_5.csv"
   },
   "modelInfo": {
     "compartment": "1cmt",
@@ -11,11 +14,10 @@
   },
   "initPar": {
     "lcl": 2.3,
-    "lvc": 10.0,
-    "etaLcl":  0.15,
-    "etaLvc":   0.15,
-    "(etaLcl,etaLvc)":    0.6,
-    "CcPropSd": 0.15 
-  },
-  "optimControl": { "algorithm": "NLOPT_LD_LBFGS", "maxeval": 100 }
+    "lvc": 9.87,
+    "etaLcl":  0.0900,
+    "etaLvc":   0.110,
+    "(etaLcl,etaLvc)": 0.556,
+    "CcPropSd": 0.153 
+  }
 }

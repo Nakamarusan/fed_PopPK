@@ -1,38 +1,49 @@
-# server_main.R
-
 # ① 通信ヘルパー＆設定パーサ読込
-# RPC ヘルパー
 source("server_comm.R",       chdir = TRUE)
-# 目的関数集約
 source("server_objective.R",  chdir = TRUE)
-# 全体最適化ループ
 source("server_optimize.R",   chdir = TRUE)
-source("server_objective.R",   chdir = TRUE) 
-source("server_config.R",   chdir = TRUE) 
+source("server_config.R",     chdir = TRUE)
+
 library(jsonlite)
 library(logger)
 
+# 無制約変換関数
+transform_init_par <- function(init_par) {
+  transformed <- init_par
+  
+  if (!is.null(init_par[["etaLcl"]])) transformed[["etaLcl"]] <- log(init_par[["etaLcl"]]^2)
+  if (!is.null(init_par[["etaLvc"]])) transformed[["etaLvc"]] <- log(init_par[["etaLvc"]]^2)
+  if (!is.null(init_par[["CcPropSd"]])) transformed[["CcPropSd"]] <- log(init_par[["CcPropSd"]])
+  
+  rho_name <- "(etaLcl,etaLvc)"
+  if (!is.null(init_par[[rho_name]])) {
+    rho <- init_par[[rho_name]]
+    if (abs(rho) >= 1) rho <- sign(rho) * 0.999
+    transformed[[rho_name]] <- atanh(rho)
+  }
+
+  transformed
+}
+
 # ② server.json／CLI から設定をロード
 cfg <- parse_and_load_config()
-# cfg$clients      : named vector baseURL → dataPath
-# cfg$modelInfo    : list(compartment, administration, iiv, res)
-# cfg$initPar      : named list of initial parameters
-# cfg$optimControl : list(nloptr オプション)
-# cfg$max_iter     : integer
 
 # ③ クライアントが立ち上がるまで少し待機
 Sys.sleep(5)
 
-# ④ /init を一度だけ実行
+# ④ /init を一度だけ実行（制約前スケール → 無制約スケールに修正）
 send_init(
   client_map = cfg$clients,
   modelInfo  = cfg$modelInfo,
-  initPar    = cfg$initPar
+  initPar    = as.list(transform_init_par(cfg$initPar))  # 修正済み
 )
 
-# ⑤ federated L-BFGS 最適化
+# ⑤ 最適化のため無制約スケールに変換（unlist は optimize 用に必要）
+init_par_transformed <- unlist(transform_init_par(cfg$initPar))
+
+# ⑥ federated L-BFGS 最適化
 res <- server_optimize(
-  init_par    = unlist(cfg$initPar),
+  init_par    = init_par_transformed,
   client_map  = cfg$clients,
   common_info = list(modelInfo = cfg$modelInfo),
   opts        = cfg$optimControl,
@@ -40,5 +51,5 @@ res <- server_optimize(
   agg_fn      = aggregate_responses
 )
 
-# ⑥ 結果を出力
+# ⑦ 結果を出力
 cat(toJSON(res, auto_unbox = TRUE, digits = 10))
