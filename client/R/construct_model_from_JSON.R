@@ -6,17 +6,14 @@ suppressPackageStartupMessages({
 
 #' Convert `modelInfo` + (optional) `init_par` to an **rxUi** object
 #'
-#' @param model_info list    – 必須キー: `compartment`, `administration`, `iiv`, `res`
-#' @param init_par   numeric vector or list of numerics (named) – iniDf$est を上書き（無制約スケールとみなす）
-#' @return **rxUi** （まだコンパイルしていない）
-#' @export
+#' @param model_info list – 必須キー: `compartment`, `administration`, `iiv`, `res`
+#' @param init_par   named numeric/list – iniDf$est を上書き（制約スケール）
+#' @return rxUi object
 construct_model_from_JSON <- function(model_info, init_par = NULL) {
   ## ❶ validate model_info
   req <- c("compartment", "administration", "iiv", "res")
   miss <- setdiff(req, names(model_info))
-  if (length(miss)) {
-    stop("model_info に欠落: ", paste(miss, collapse = ", "))
-  }
+  if (length(miss)) stop("model_info に欠落: ", paste(miss, collapse = ", "))
   adm <- match.arg(tolower(model_info$administration), c("iv", "po"))
   res <- match.arg(tolower(model_info$res), c("add", "prop", "mix"))
 
@@ -24,8 +21,7 @@ construct_model_from_JSON <- function(model_info, init_par = NULL) {
   base <- sprintf("PK_%s_des", model_info$compartment)
   mdl <- tryCatch(
     readModelDb(base),
-    error = function(e)
-      stop("readModelDb('", base, "') 失敗: ", e$message)
+    error = function(e) stop("readModelDb('", base, "') 失敗: ", e$message)
   )
   if (adm == "iv") mdl <- mdl |> removeDepot()
 
@@ -45,73 +41,75 @@ construct_model_from_JSON <- function(model_info, init_par = NULL) {
   }
 
   ## ❹ add residual error
-  err_slots <- switch(
-    res,
+  err_slots <- switch(res,
     add  = "addSd",
     prop = "propSd",
     mix  = c("addSd", "propSd")
   )
-  ## ❹ add residual error
-  mdl <- suppressMessages({
-    mdl |> addResErr(err_slots)
-  })
+  mdl <- suppressMessages(mdl |> addResErr(err_slots))
 
-  ## ❺ overwrite ini parameters
+  ## ❺ prepare iniDf with `label`
+  iniDf <- mdl$iniDf
+  iniDf$label <- iniDf$name  # 初期状態として name を label にコピー
+
+  # 論理名 → name 対応のマップ
+  name_map <- list(
+    "etaLcl" = "omega(1,1)",
+    "etaLvc" = "omega(2,2)",
+    "(etaLcl,etaLvc)" = "omega(1,2)",
+    "CcPropSd" = "prop.sd",
+    "lcl" = "lcl",
+    "lvc" = "lvc"
+  )
+
+  # label 列を上書き
+  for (label in names(name_map)) {
+    name <- name_map[[label]]
+    if (name %in% iniDf$name) {
+      iniDf$label[iniDf$name == name] <- label
+    }
+  }
+
+  mdl$iniDf <- iniDf
+
+  ## ❻ iniDf$est を上書き（共分散項含む）
   if (!is.null(init_par)) {
     if (is.numeric(init_par) && !is.list(init_par)) {
       stopifnot(!is.null(names(init_par)), all(nzchar(names(init_par))))
       init_par <- as.list(init_par)
     }
-    if (is.list(init_par)) {
-      if (!all(vapply(init_par, is.numeric, TRUE)))
-        stop("init_par のすべての要素は数値でなければなりません")
-      stopifnot(!is.null(names(init_par)), all(nzchar(names(init_par))))
+    if (!all(vapply(init_par, is.numeric, TRUE))) {
+      stop("init_par のすべての要素は数値でなければなりません")
     }
 
-    mdl <- rxode2::as.rxUi(mdl)
-
-    # 共分散 (etaLcl, etaLvc) の処理
     rho_nm <- "(etaLcl,etaLvc)"
     if (!is.null(init_par[[rho_nm]])) {
       cov_val <- init_par[[rho_nm]]
-      message(sprintf("[LOG] 共分散として受け取った '(etaLcl,etaLvc)' = %.6f", cov_val))
+      message(sprintf("[LOG] 共分散として受け取った '%s' = %.6f", rho_nm, cov_val))
 
-      idx_cov <- match(rho_nm, mdl$iniDf$name)
+      idx_cov <- match(rho_nm, iniDf$label)
       if (!is.na(idx_cov)) {
-        mdl$iniDf$est[idx_cov] <- cov_val
+        iniDf$est[idx_cov] <- cov_val
       } else {
-        etaLcl_idx <- which(mdl$iniDf$name == "etaLcl")
-        etaLvc_idx <- which(mdl$iniDf$name == "etaLvc")
-        cor_idx <- which(
-          (mdl$iniDf$lower == etaLcl_idx & mdl$iniDf$upper == etaLvc_idx) |
-          (mdl$iniDf$lower == etaLvc_idx & mdl$iniDf$upper == etaLcl_idx)
-        )
-        if (length(cor_idx)) {
-          mdl$iniDf$est[cor_idx] <- cov_val
-          log_info("[LOG] 共分散 '(etaLcl,etaLvc)' を index {cor_idx} に設定: {cov_val}")
-        } else {
-          warning("共分散項 '(etaLcl,etaLvc)' を iniDf 内で見つけられませんでした")
-        }
+        warning(sprintf("共分散 '%s' を iniDf$label に見つけられません", rho_nm))
       }
 
-      # 残りのループで処理されないよう削除
-      init_par[[rho_nm]] <- NULL
+      init_par[[rho_nm]] <- NULL  # 他と重複しないよう削除
     }
 
-    # 残りの通常パラメータを上書き
     for (nm in names(init_par)) {
-      val <- init_par[[nm]]
-      idx <- match(nm, mdl$iniDf$name)
-      if (is.na(idx)) {
-        warning("init_par: unknown parameter '", nm, "' – 無視します")
+      idx <- match(nm, iniDf$label)
+      if (!is.na(idx)) {
+        iniDf$est[idx] <- init_par[[nm]]
       } else {
-        mdl$iniDf$est[idx] <- val
+        warning(sprintf("init_par: '%s' に対応する iniDf$label が見つかりません – 無視", nm))
       }
     }
 
-    # クラス修正
-    class(mdl) <- unique(c("rxUi", setdiff(class(mdl), "rxUi")))
+    mdl$iniDf <- iniDf
   }
 
-  mdl
+  # 明示的に rxUi クラスを保持
+  class(mdl) <- unique(c("rxUi", setdiff(class(mdl), "rxUi")))
+  return(mdl)
 }
