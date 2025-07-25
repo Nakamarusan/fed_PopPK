@@ -5,26 +5,18 @@ suppressPackageStartupMessages({
   library(numDeriv)
 })
 
-parameter_name_map <- list(
-  "etaLcl" = "omega(1,1)",
-  "etaLvc" = "omega(2,2)",
-  "(etaLcl,etaLvc)" = "omega(1,2)",
-  "CcPropSd" = "prop.sd",
-  "lcl" = "lcl",
-  "lvc" = "lvc"
-)
-
 inverse_transform_par <- function(par) {
   par_named <- par
 
-  if (!is.null(par[["etaLcl"]])) par_named[["etaLcl"]] <- sqrt(exp(par[["etaLcl"]]))
-  if (!is.null(par[["etaLvc"]])) par_named[["etaLvc"]] <- sqrt(exp(par[["etaLvc"]]))
+  if (!is.null(par[["etaLcl"]])) par_named[["etaLcl"]] <- exp(par[["etaLcl"]])
+  if (!is.null(par[["etaLvc"]])) par_named[["etaLvc"]] <- exp(par[["etaLvc"]])
   if (!is.null(par[["CcPropSd"]])) par_named[["CcPropSd"]] <- exp(par[["CcPropSd"]])
 
   if (!is.null(par[["(etaLcl,etaLvc)"]])) {
     rho <- tanh(par[["(etaLcl,etaLvc)"]])
-    sd_etaLcl <- par_named[["etaLcl"]]
-    sd_etaLvc <- par_named[["etaLvc"]]
+    # 共分散の計算のために、内部で一時的に標準偏差を計算する
+    sd_etaLcl <- sqrt(par_named[["etaLcl"]])
+    sd_etaLvc <- sqrt(par_named[["etaLvc"]])
     cov_val <- rho * sd_etaLcl * sd_etaLvc
     par_named[["(etaLcl,etaLvc)"]] <- cov_val
 
@@ -37,15 +29,15 @@ inverse_transform_par <- function(par) {
 
 update_model_estimates <- function(model_ui, par_named) {
   iniDf <- model_ui$iniDf
-  name_map <- setNames(iniDf$name, iniDf$label)
 
-  for (label in names(par_named)) {
-    val <- par_named[[label]]
-    if (label %in% names(name_map)) {
-      name <- name_map[[label]]
-      iniDf$est[iniDf$name == name] <- val
+  for (name_to_update in names(par_named)) {
+    val <- par_named[[name_to_update]]
+    # 'name'列に一致するものを探す
+    idx <- match(name_to_update, iniDf$name)
+    if (!is.na(idx)) {
+      iniDf$est[idx] <- val
     } else {
-      warning(sprintf("parameter '%s' に対応する iniDf エントリが見つかりません", label))
+      warning(sprintf("parameter '%s' に対応する iniDf$name エントリが見つかりません", name_to_update))
     }
   }
 
@@ -54,6 +46,12 @@ update_model_estimates <- function(model_ui, par_named) {
 }
 
 compute_obj_grad <- function(p_unconstrained, state_env) {
+  # === デバッグコードを追加 ===
+  message("### DEBUG: state_env$model_ui$iniDf の構造 ###")
+  print(str(state_env$model_ui$iniDf))
+  message("### DEBUG: state_env$model_ui$iniDf の内容 ###")
+  print(state_env$model_ui$iniDf)
+  # =========================
   message("=== compute_obj_grad 開始 ===")
 
   p_list <- as.list(p_unconstrained)
@@ -70,7 +68,7 @@ compute_obj_grad <- function(p_unconstrained, state_env) {
       model_ui_updated,
       state_env$dt,
       est = "focei",
-      control = foceiControl(maxOuterIterations = 0, maxInnerIterations = 0, print = 0)
+      control = foceiControl(maxOuterIterations = 0, print = 0)
     )
   }, error = function(e) {
     message("!! nlmixr2 error in objf: ", e$message)

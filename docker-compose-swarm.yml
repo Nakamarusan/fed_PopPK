@@ -1,0 +1,103 @@
+version: "3.8"
+
+services:
+  # ------------------- SERVER SERVICE -------------------
+  server:
+    image: fedpoppk-server:latest # 事前にビルドしたサーバーイメージ名
+    networks:
+      - fednet
+    volumes:
+      - ./configs/server.json:/project/configs/server.json:ro
+      - ./server/R:/project/R:ro
+    ports:
+      - target: 8080      # コンテナ内部のポート
+        published: 8080   # Swarmクラスタ全体で公開されるポート
+        protocol: tcp
+        mode: ingress
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.role == manager" # Swarmの管理ノードに配置
+
+  # ------------------- CLIENT SERVICES -------------------
+  client1:
+    image: fedpoppk-client:latest # 全クライアントで共有するイメージ名
+    environment:
+      - PORT=8001 # コンテナ内部のポート (全クライアントで統一可能)
+    networks:
+      - fednet
+    volumes:
+      - ./client/data/data1_1.csv:/project/data/data1_1.csv:ro
+      - ./client/R:/project/R:ro
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.client_id == 1" # client_id=1のラベルが付いたノードに配置
+
+  client2:
+    image: fedpoppk-client:latest
+    environment:
+      - PORT=8001
+    networks:
+      - fednet
+    volumes:
+      - ./client/data/data1_2.csv:/project/data/data1_2.csv:ro
+      - ./client/R:/project/R:ro
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.client_id == 2"
+
+  client3:
+    image: fedpoppk-client:latest
+    environment:
+      - PORT=8001
+    networks:
+      - fednet
+    volumes:
+      - ./client/data/data1_3.csv:/project/data/data1_3.csv:ro
+      - ./client/R:/project/R:ro
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.client_id == 3"
+
+  client4:
+    image: fedpoppk-client:latest
+    environment:
+      - PORT=8001
+    networks:
+      - fednet
+    volumes:
+      - ./client/data/data1_4.csv:/project/data/data1_4.csv:ro
+      - ./client/R:/project/R:ro
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.client_id == 4"
+
+  client5:
+    image: fedpoppk-client:latest
+    environment:
+      - PORT=8001
+    networks:
+      - fednet
+    volumes:
+      - ./client/data/data1_5.csv:/project/data/data1_5.csv:ro
+      - ./client/R:/project/R:ro
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.client_id == 5"
+
+# ------------------- NETWORK DEFINITION -------------------
+networks:
+  fednet:
+    driver: overlay # 複数ホスト間通信用のoverlayネットワーク
+    attachable: true

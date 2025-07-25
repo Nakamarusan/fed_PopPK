@@ -1,3 +1,4 @@
+# server_optimize.R
 suppressPackageStartupMessages({
   library(logger)
 })
@@ -7,7 +8,7 @@ suppressPackageStartupMessages({
 server_optimize <- function(init_par,
                             client_map,
                             common_info = list(),
-                            opts        = list(maxit = 100, reltol = 1e-6),
+                            opts        = list(maxit = 100),
                             comm_fn     = poll_clients,
                             agg_fn      = aggregate_responses) {
   stopifnot(

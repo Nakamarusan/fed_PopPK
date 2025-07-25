@@ -27,10 +27,7 @@ function(req, res){
   .global_state$initPar   <- payload$initPar
   .global_state$dt        <- load_data(payload$dataPath)
 
-  initPar_trans <- as.list(payload$initPar)
-  par_real <- inverse_transform_par(initPar_trans)
-
-  .global_state$model_ui <- construct_model_from_JSON(payload$modelInfo, init_par = par_real)
+  .global_state$model_ui <- construct_model_from_JSON(model_info = payload$modelInfo, init_par = payload$initPar)
 
   message("モデル情報・初期値・データのロードと構築完了")
   list(status = "initialized")

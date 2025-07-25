@@ -13,11 +13,11 @@
     "res": "prop"
   },
   "initPar": {
-    "lcl": 2.3,
-    "lvc": 9.87,
-    "etaLcl":  0.0900,
-    "etaLvc":   0.110,
-    "(etaLcl,etaLvc)": 0.556,
-    "CcPropSd": 0.153 
+    "lcl": 0.8329,
+    "lvc": 2.3026,
+    "etaLcl":  0.15,
+    "etaLvc":   0.15,
+    "(etaLcl,etaLvc)": 0.6,
+    "CcPropSd": 0.153
   }
 }

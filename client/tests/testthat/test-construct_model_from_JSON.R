@@ -3,8 +3,8 @@ library(rxode2)
 library(nlmixr2lib)
 
 # 関数定義を読み込む
-source("R/json_parser.R", chdir = TRUE)
 source("Rconstruct_model_from_JSON.R", chdir = TRUE)
+
 
 test_that("construct_model_from_JSON builds a valid model object", {
   model_info <- list(

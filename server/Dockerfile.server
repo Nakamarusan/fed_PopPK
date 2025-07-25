@@ -1,5 +1,5 @@
 # Dockerfile.server
-FROM fedpoppk/r-ver:0.1.0
+FROM fedpoppk/base:0.1.0
 
 WORKDIR /project
 
