@@ -1,4 +1,3 @@
-# server_optimize.R
 suppressPackageStartupMessages({
   library(logger)
 })
@@ -11,92 +10,78 @@ server_optimize <- function(init_par,
                             opts        = list(maxit = 100),
                             comm_fn     = poll_clients,
                             agg_fn      = aggregate_responses) {
+  
+  # --- (引数のチェックは変更なし) ---
   stopifnot(
-    is.numeric(init_par),
-    !is.null(names(init_par)),
-    all(nzchar(names(init_par))),
-    is.character(client_map),
-    !is.null(names(client_map)),
-    all(nzchar(names(client_map)))
+    is.numeric(init_par), !is.null(names(init_par)), all(nzchar(names(init_par))),
+    is.character(client_map), !is.null(names(client_map)), all(nzchar(names(client_map)))
   )
 
   par_names <- names(init_par)
   urls      <- names(client_map)
   iter      <- 0L
-
-  # --- ログ保存リスト
   optim_log <- list()
 
-  # --- 目的関数
-  obj_fn <- function(p_vec) {
+  # --- ▼▼▼ ここから修正 ▼▼▼ ---
+
+  # --- 計算結果キャッシュ用環境 ---
+  cache_env <- new.env(parent = emptyenv())
+  cache_env$p_vec <- NULL
+  cache_env$obj   <- NULL
+  cache_env$grad  <- NULL
+
+  # --- 計算とキャッシュを共通化するヘルパー関数 ---
+  run_and_cache <- function(p_vec) {
+    # 前回のパラメータと同じなら、キャッシュを使い、再計算しない
+    if (!is.null(cache_env$p_vec) && all(cache_env$p_vec == p_vec)) {
+      return()
+    }
+
     iter <<- iter + 1L
     log_info("iter %d: calling %d clients", iter, length(urls))
 
     p_named <- setNames(p_vec, par_names)
-
     named_payloads <- setNames(
-      lapply(urls, \(u) c(
-        common_info,
-        list(
-          dataPath = client_map[[u]],
-          p        = as.list(p_named)
-        )
-      )),
+      lapply(urls, \(u) c(common_info, list(dataPath = client_map[[u]], p = as.list(p_named)))),
       urls
     )
-
-    responses <- comm_fn(
-      named_payloads,
-      timeout   = opts$timeout   %||% 30,
-      max_tries = opts$max_tries %||% 3,
-      pause     = opts$pause     %||% 1
-    )
+    
+    responses <- comm_fn(named_payloads,
+                         timeout   = opts$timeout   %||% 30,
+                         max_tries = opts$max_tries %||% 3,
+                         pause     = opts$pause     %||% 1)
 
     agg <- agg_fn(responses)
-    obj <- as.numeric(agg$objf)
-    grad <- as.numeric(agg$grad)
+
+    # 計算結果をキャッシュに保存
+    cache_env$p_vec <- p_vec
+    cache_env$obj   <- as.numeric(agg$objf)
+    cache_env$grad  <- as.numeric(agg$grad)
 
     # ログ記録
     optim_log[[length(optim_log) + 1]] <<- list(
-      iter = iter,
-      par  = p_vec,
-      objf = obj,
-      grad = grad
+      iter = iter, par = p_vec, objf = cache_env$obj, grad = cache_env$grad
     )
-
-    stopifnot(is.finite(obj))
-    obj
+    
+    stopifnot(is.finite(cache_env$obj))
   }
 
-  # --- 勾配関数
+  # --- 目的関数 (キャッシュを利用) ---
+  obj_fn <- function(p_vec) {
+    run_and_cache(p_vec)
+    return(cache_env$obj)
+  }
+
+  # --- 勾配関数 (キャッシュを利用) ---
   grad_fn <- function(p_vec) {
-    p_named <- setNames(p_vec, par_names)
-
-    named_payloads <- setNames(
-      lapply(urls, \(u) c(
-        common_info,
-        list(
-          dataPath = client_map[[u]],
-          p        = as.list(p_named)
-        )
-      )),
-      urls
-    )
-
-    responses <- comm_fn(
-      named_payloads,
-      timeout   = opts$timeout   %||% 30,
-      max_tries = opts$max_tries %||% 3,
-      pause     = opts$pause     %||% 1
-    )
-
-    agg  <- agg_fn(responses)
-    grad <- as.numeric(agg$grad)
-    stopifnot(length(grad) == length(p_vec), all(is.finite(grad)))
-    grad
+    run_and_cache(p_vec)
+    stopifnot(length(cache_env$grad) == length(p_vec), all(is.finite(cache_env$grad)))
+    return(cache_env$grad)
   }
+  
+  # --- ▲▲▲ ここまで修正 ▲▲▲ ---
 
-  # --- 最適化実行
+  # --- 最適化実行 (変更なし) ---
   res <- optim(
     par     = init_par,
     fn      = obj_fn,

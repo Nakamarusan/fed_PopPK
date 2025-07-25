@@ -1,10 +1,10 @@
 {
   "clients": {
-    "http://client1:8001": "/project/data/data1_1.csv",
-    "http://client2:8002": "/project/data/data1_2.csv",
-    "http://client3:8003": "/project/data/data1_3.csv",
-    "http://client4:8004": "/project/data/data1_4.csv",
-    "http://client5:8005": "/project/data/data1_5.csv"
+    "http://client1:8000": "/project/data/data1_1.csv",
+    "http://client2:8000": "/project/data/data1_2.csv",
+    "http://client3:8000": "/project/data/data1_3.csv",
+    "http://client4:8000": "/project/data/data1_4.csv",
+    "http://client5:8000": "/project/data/data1_5.csv"
   },
   "modelInfo": {
     "compartment": "1cmt",

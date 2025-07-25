@@ -7,37 +7,31 @@ x-client-base: &client-base
                "plumber::plumb('plumber.R')$
                 run(host='0.0.0.0', port=Sys.getenv('PORT'))"]
   environment:
-    - PORT    
+    - PORT=8000          # 全クライアントで同一でも構わない
   depends_on: []
 services:
   client1:
-    <<: *client-base
-    environment: { PORT: 8001 }
-    ports: ["8001:8001"]        
+    <<: *client-base   
     volumes:
       - ./client/data/data1_1.csv:/project/data/data1_1.csv:ro
       - ./client/R:/project/R:ro
   client2:
     <<: *client-base
-    environment: { PORT: 8002 }
     volumes:
       - ./client/data/data1_2.csv:/project/data/data1_2.csv:ro
       - ./client/R:/project/R:ro
   client3:
     <<: *client-base
-    environment: { PORT: 8003 }
     volumes:
       - ./client/data/data1_3.csv:/project/data/data1_3.csv:ro
       - ./client/R:/project/R:ro
   client4:
     <<: *client-base
-    environment: { PORT: 8004 }
     volumes:
       - ./client/data/data1_4.csv:/project/data/data1_4.csv:ro
       - ./client/R:/project/R:ro
   client5:
     <<: *client-base
-    environment: { PORT: 8005 }
     volumes:
       - ./client/data/data1_5.csv:/project/data/data1_5.csv:ro
       - ./client/R:/project/R:ro
@@ -58,6 +52,18 @@ services:
       - ./server/R:/project/R:ro # ソースコードを共通でマウント
     entrypoint: ["Rscript", "server_main.R",
                  "--config", "/project/configs/server.json"]
+  dashboard:
+      build: # serverと全く同じbuildセクションを追加
+        dockerfile: server/Dockerfile.server
+      command: ["R", "-e", "shiny::runApp('/project/R/app.R', host='0.0.0.0', port=8181)"]
+      ports:
+        - "8181:8181" # Shinyアプリをローカルの8181ポートで公開
+      networks:
+        - fednet
+      volumes:
+        - ./server/R:/project/R:ro # serverと同じソースとログファイルを共有
+      depends_on:
+        - server
 
 networks:
   fednet:
