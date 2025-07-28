@@ -50,6 +50,7 @@ services:
     volumes:
       - ./configs/server.json:/project/configs/server.json:ro
       - ./server/R:/project/R:ro # ソースコードを共通でマウント
+      - ./logs:/project/logs
     entrypoint: ["Rscript", "server_main.R",
                  "--config", "/project/configs/server.json"]
   dashboard:
@@ -62,6 +63,7 @@ services:
         - fednet
       volumes:
         - ./server/R:/project/R:ro # serverと同じソースとログファイルを共有
+        - ./logs:/project/logs
       depends_on:
         - server
 

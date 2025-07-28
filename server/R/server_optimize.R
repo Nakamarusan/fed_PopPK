@@ -30,41 +30,55 @@ server_optimize <- function(init_par,
   cache_env$obj   <- NULL
   cache_env$grad  <- NULL
 
-  # --- 計算とキャッシュを共通化するヘルパー関数 ---
-  run_and_cache <- function(p_vec) {
-    # 前回のパラメータと同じなら、キャッシュを使い、再計算しない
-    if (!is.null(cache_env$p_vec) && all(cache_env$p_vec == p_vec)) {
-      return()
-    }
+run_and_cache <- function(p_vec) {
+  if (!is.null(cache_env$p_vec) && all(cache_env$p_vec == p_vec)) return()
 
-    iter <<- iter + 1L
-    log_info("iter %d: calling %d clients", iter, length(urls))
+  iter <<- iter + 1L
+  log_info("iter %d: calling %d clients", iter, length(urls))
 
-    p_named <- setNames(p_vec, par_names)
-    named_payloads <- setNames(
-      lapply(urls, \(u) c(common_info, list(dataPath = client_map[[u]], p = as.list(p_named)))),
-      urls
-    )
-    
-    responses <- comm_fn(named_payloads,
-                         timeout   = opts$timeout   %||% 30,
-                         max_tries = opts$max_tries %||% 3,
-                         pause     = opts$pause     %||% 1)
+  p_named <- setNames(p_vec, par_names)
+  named_payloads <- setNames(
+    lapply(urls, \(u) c(common_info, list(dataPath = client_map[[u]], p = as.list(p_named)))),
+    urls
+  )
 
-    agg <- agg_fn(responses)
+  responses <- comm_fn(
+    named_payloads,
+    timeout   = opts$timeout   %||% 30,
+    max_tries = opts$max_tries %||% 3,
+    pause     = opts$pause     %||% 1
+  )
 
-    # 計算結果をキャッシュに保存
-    cache_env$p_vec <- p_vec
-    cache_env$obj   <- as.numeric(agg$objf)
-    cache_env$grad  <- as.numeric(agg$grad)
+  agg <- agg_fn(responses)
 
-    # ログ記録
-    optim_log[[length(optim_log) + 1]] <<- list(
-      iter = iter, par = p_vec, objf = cache_env$obj, grad = cache_env$grad
-    )
-    
-    stopifnot(is.finite(cache_env$obj))
-  }
+  cache_env$p_vec <- p_vec
+  cache_env$obj   <- as.numeric(agg$objf)
+  cache_env$grad  <- as.numeric(agg$grad)
+
+  # 最初にチェック（NaNやInfで止める前にログ出力）
+  if (!is.finite(cache_env$obj)) stop("Objective value is not finite.")
+
+  # ログ記録（R内）
+  optim_log[[length(optim_log) + 1L]] <<- list(
+    iter = iter, par = p_vec, objf = cache_env$obj, grad = cache_env$grad
+  )
+
+  # ファイルに追記
+  log_path <- "/project/logs/optimization_log.csv"
+  log_df <- data.frame(
+    iter = iter,
+    objf = cache_env$obj,
+    as.list(setNames(p_vec, par_names))
+  )
+  write.table(
+    log_df,
+    file = log_path,
+    sep = ",",
+    row.names = FALSE,
+    col.names = !file.exists(log_path),
+    append = TRUE
+  )
+}
 
   # --- 目的関数 (キャッシュを利用) ---
   obj_fn <- function(p_vec) {
