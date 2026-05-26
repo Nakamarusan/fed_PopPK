@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "base_bootstrap_init_from_centralized.json"
+  ],
+  "bootstrap": {
+    "B_per_client": 500,
+    "seed_base": 4869
+  },
+  "comm": {
+    "init_max_tries": 20,
+    "init_pause": 5,
+    "init_timeout": 300,
+    "run_max_tries": 3,
+    "run_pause": 1,
+    "run_timeout": 900
+  },
+  "logging": {
+    "scenario": "raw_runs",
+    "save_par_log": true
+  }
+}

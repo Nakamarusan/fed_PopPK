@@ -1,0 +1,5 @@
+{
+  "title": "Table 1. Site-wise subject allocation and sampling design distribution.",
+  "artifacts": ["table1.csv", "table1.md"],
+  "sources": "data/meta/id_params.csv"
+}

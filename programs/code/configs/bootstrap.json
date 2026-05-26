@@ -1,0 +1,69 @@
+{
+  "clients": {
+    "http://client1:8000": "/project/data/data1_1.csv",
+    "http://client2:8000": "/project/data/data1_2.csv",
+    "http://client3:8000": "/project/data/data1_3.csv"
+  },
+  "modelInfo": {
+    "modelName": "PK_1cmt",
+    "administration": "iv",
+    "iiv": {
+      "lcl": true,
+      "lvc": true,
+      "cor": false
+    },
+    "res": "mix"
+  },
+  "initPar": {
+    "lcl": -0.3603961,
+    "lvc": -0.00471108,
+    "etaLcl": 0.0332,
+    "etaLvc": 0.0363,
+    "CcPropSd": 0.04,
+    "CcAddSd": 0.05
+  },
+  "lower": {
+    "lcl": null,
+    "lvc": null,
+    "etaLcl": 0.0001,
+    "etaLvc": 0.0001,
+    "CcPropSd": 0.001,
+    "CcAddSd": 0.001
+  },
+  "upper": {
+    "lcl": null,
+    "lvc": null,
+    "etaLcl": null,
+    "etaLvc": null,
+    "CcPropSd": null,
+    "CcAddSd": null
+  },
+  "logging": {
+    "base_dir": "/project/result/logs_boot",
+    "scenario": "bootstrap",
+    "save_par_log": true
+  },
+  "bootstrap": {
+    "B_per_client": 500,
+    "seed_base": 4869
+  },
+  "comm": {
+    "run_max_tries": 3,
+    "run_pause": 1,
+    "run_timeout": 1200
+  },
+  "optimControl": {
+    "method": "L-BFGS-B",
+    "return_grad": true,
+    "grad_cores": 6,
+    "timeout": 600,
+    "max_tries": 3,
+    "pause": 1,
+    "maxit": 100,
+    "pgtol": 0.005,
+    "factr": 100000000,
+    "maxls": 5,
+    "stepmax": 0.5,
+    "trace": 0
+  }
+}

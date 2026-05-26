@@ -1,0 +1,6 @@
+"step_id","step_label","elapsed_sec"
+"1","setup_before_init",0.174088954925537
+"2","init_barrier",5.89664745330811
+"3-5","optimization_loop",1456.77848434448
+"6","finalize_outputs",0.0799129009246826
+"1-6","total_runtime",1462.97186088562

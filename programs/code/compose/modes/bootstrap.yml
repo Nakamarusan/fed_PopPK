@@ -1,0 +1,37 @@
+services:
+  client1:
+    entrypoint: ["Rscript", "-e", "pr <- plumber::plumb('/project/apps/client/plumber.R'); pr$$run(host='0.0.0.0', port=as.integer(Sys.getenv('PORT','8000')))" ]
+    environment:
+      CLIENT_MODE: bootstrap
+    volumes:
+      - ../apps:/project/apps:ro
+      - ../R:/project/R:ro
+      - ../data/splits/${SCENARIO:-scenario1}/data1_1.csv:/project/data/data1_1.csv:ro
+      - ../result/cache/${SCENARIO:-scenario1}/client1:/project/cache
+
+  client2:
+    entrypoint: ["Rscript", "-e", "pr <- plumber::plumb('/project/apps/client/plumber.R'); pr$$run(host='0.0.0.0', port=as.integer(Sys.getenv('PORT','8000')))" ]
+    environment:
+      CLIENT_MODE: bootstrap
+    volumes:
+      - ../apps:/project/apps:ro
+      - ../R:/project/R:ro
+      - ../data/splits/${SCENARIO:-scenario1}/data1_2.csv:/project/data/data1_2.csv:ro
+      - ../result/cache/${SCENARIO:-scenario1}/client2:/project/cache
+
+  client3:
+    entrypoint: ["Rscript", "-e", "pr <- plumber::plumb('/project/apps/client/plumber.R'); pr$$run(host='0.0.0.0', port=as.integer(Sys.getenv('PORT','8000')))" ]
+    environment:
+      CLIENT_MODE: bootstrap
+    volumes:
+      - ../apps:/project/apps:ro
+      - ../R:/project/R:ro
+      - ../data/splits/${SCENARIO:-scenario1}/data1_3.csv:/project/data/data1_3.csv:ro
+      - ../result/cache/${SCENARIO:-scenario1}/client3:/project/cache
+
+  server:
+    environment:
+      BOOT_TRIAL_START: ${BOOT_TRIAL_START:-}
+      BOOT_TRIAL_COUNT: ${BOOT_TRIAL_COUNT:-}
+      BOOT_CONFIG: ${BOOT_CONFIG:-bootstrap.json}
+    entrypoint: ["Rscript", "/project/apps/server/bootstrap_main.R", "--config", "/project/configs/${BOOT_CONFIG:-bootstrap.json}"]

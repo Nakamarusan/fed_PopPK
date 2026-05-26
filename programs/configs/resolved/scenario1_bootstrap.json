@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "bootstrap_base.json"
+  ],
+  "clients": {
+    "http://client1:8000": "/project/data/scenario1/base/data1_1.csv",
+    "http://client2:8000": "/project/data/scenario1/base/data1_2.csv",
+    "http://client3:8000": "/project/data/scenario1/base/data1_3.csv"
+  },
+  "logging": {
+    "base_dir": "/project/results/runs/scenario1/bootstrap/federated",
+    "scenario": "scenario1/raw_runs",
+    "save_par_log": true
+  },
+  "bootstrap": {
+    "B_per_client": 500,
+    "seed_base": 4869,
+    "pre_generated_root": "/project/data/scenario1/bootstrap"
+  }
+}

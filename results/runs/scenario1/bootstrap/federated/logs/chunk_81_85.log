@@ -1,0 +1,210 @@
+time="2026-05-22T04:09:29+09:00" level=warning msg="The \"SERVER_CONFIG_PATH\" variable is not set. Defaulting to a blank string."
+Compose now can delegate build to bake for better performances
+Just set COMPOSE_BAKE=true
+#0 building with "default" instance using docker driver
+
+#1 [client2 internal] load build definition from Dockerfile.app
+#1 transferring dockerfile: 778B done
+#1 DONE 0.0s
+
+#2 [client3 internal] load build definition from Dockerfile.app
+#2 transferring dockerfile: 778B done
+#2 DONE 0.0s
+
+#3 [client1 internal] load build definition from Dockerfile.app
+#3 transferring dockerfile: 778B done
+#3 DONE 0.0s
+
+#4 [client1 internal] load metadata for docker.io/fedpoppk/base:0.1.0
+#4 DONE 0.0s
+
+#5 [client2 internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [client3 internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [client1 internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [client1 1/8] FROM docker.io/fedpoppk/base:0.1.0
+#8 DONE 0.0s
+
+#9 [client2 internal] load build context
+#9 transferring context: 736.51kB 0.3s done
+#9 DONE 0.3s
+
+#10 [client3 internal] load build context
+#10 transferring context: 736.51kB 0.3s done
+#10 DONE 0.3s
+
+#11 [client1 internal] load build context
+#11 transferring context: 736.51kB 0.3s done
+#11 DONE 0.3s
+
+#12 [client3 6/8] COPY R/ R/
+#12 CACHED
+
+#13 [client3 4/8] RUN Rscript -e "options(renv.consent=TRUE, Ncpus=parallel::detectCores());                 renv::restore(prompt=FALSE)"
+#13 CACHED
+
+#14 [client3 7/8] COPY analysis/ analysis/
+#14 CACHED
+
+#15 [client3 3/8] COPY renv.lock .Rprofile renv/activate.R ./
+#15 CACHED
+
+#16 [client3 5/8] COPY apps/ apps/
+#16 CACHED
+
+#17 [client3 2/8] WORKDIR /project
+#17 CACHED
+
+#18 [client2 8/8] RUN mkdir -p /project/configs/modes /project/data /project/artifacts /project/result
+#18 CACHED
+
+#19 [client3] exporting to image
+#19 exporting layers done
+#19 writing image sha256:ca1949217a3e18ea335ecbca18fd09cb8129cfe35e6a4592044439795312181e done
+#19 naming to docker.io/library/defboot_design_change_n403030_wtmclu_scenario1_81_85-client3 0.0s done
+#19 DONE 0.0s
+
+#20 [client2] exporting to image
+#20 exporting layers done
+#20 writing image sha256:ae335cca9916842c56cf4fc5b4b45b6bbb8b0cbe5d3a11b6daedbac1d6bb5ebb done
+#20 naming to docker.io/library/defboot_design_change_n403030_wtmclu_scenario1_81_85-client2 0.0s done
+#20 DONE 0.0s
+
+#21 [client1] exporting to image
+#21 exporting layers done
+#21 writing image sha256:19dd51057e2b0b58d031ca77960804b5676196756b70f8501115c4fce3a2b77b done
+#21 naming to docker.io/library/defboot_design_change_n403030_wtmclu_scenario1_81_85-client1 0.0s done
+#21 DONE 0.1s
+
+#22 [client3] resolving provenance for metadata file
+#22 DONE 0.0s
+
+#23 [client1] resolving provenance for metadata file
+#23 DONE 0.0s
+
+#24 [client2] resolving provenance for metadata file
+#24 DONE 0.0s
+
+#25 [server internal] load build definition from Dockerfile.app
+#25 transferring dockerfile: 778B done
+#25 DONE 0.0s
+
+#4 [server internal] load metadata for docker.io/fedpoppk/base:0.1.0
+#4 DONE 0.0s
+
+#26 [server internal] load .dockerignore
+#26 transferring context: 2B done
+#26 DONE 0.0s
+
+#8 [server 1/8] FROM docker.io/fedpoppk/base:0.1.0
+#8 DONE 0.0s
+
+#27 [server internal] load build context
+#27 transferring context: 736.51kB 0.4s done
+#27 DONE 0.4s
+
+#28 [server 3/8] COPY renv.lock .Rprofile renv/activate.R ./
+#28 CACHED
+
+#29 [server 4/8] RUN Rscript -e "options(renv.consent=TRUE, Ncpus=parallel::detectCores());                 renv::restore(prompt=FALSE)"
+#29 CACHED
+
+#17 [server 2/8] WORKDIR /project
+#17 CACHED
+
+#30 [server 5/8] COPY apps/ apps/
+#30 CACHED
+
+#31 [server 6/8] COPY R/ R/
+#31 CACHED
+
+#32 [server 7/8] COPY analysis/ analysis/
+#32 CACHED
+
+#33 [server 8/8] RUN mkdir -p /project/configs/modes /project/data /project/artifacts /project/result
+#33 CACHED
+
+#34 [server] exporting to image
+#34 exporting layers done
+#34 writing image sha256:cccc145740be4736e39de5bda25e8933621890b81a1f30a6500506bfa8adaad8 done
+#34 naming to docker.io/library/defboot_design_change_n403030_wtmclu_scenario1_81_85-server 0.0s done
+#34 DONE 0.0s
+
+#35 [server] resolving provenance for metadata file
+#35 DONE 0.0s
+ client1  Built
+ client2  Built
+ client3  Built
+ server  Built
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site1_net  Creating
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site1_net  Created
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site2_net  Creating
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site2_net  Created
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site3_net  Creating
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site3_net  Created
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Creating
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Creating
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Creating
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Created
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Created
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Created
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Creating
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Created
+Attaching to client1-1, client2-1, client3-1, server-1
+client2-1  | Running plumber API at http://0.0.0.0:8000
+client2-1  | Running swagger Docs at http://127.0.0.1:8000/__docs__/
+client1-1  | Running plumber API at http://0.0.0.0:8000
+client1-1  | Running swagger Docs at http://127.0.0.1:8000/__docs__/
+client3-1  | Running plumber API at http://0.0.0.0:8000
+client3-1  | Running swagger Docs at http://127.0.0.1:8000/__docs__/
+client1-1  | ℹ parameter labels from comments are typically ignored in non-interactive mode
+client3-1  | ℹ parameter labels from comments are typically ignored in non-interactive mode
+client1-1  | ℹ Need to run with the source intact to parse comments
+client3-1  | ℹ Need to run with the source intact to parse comments
+client2-1  | ℹ parameter labels from comments are typically ignored in non-interactive mode
+client2-1  | ℹ Need to run with the source intact to parse comments
+server-1   | [send_init] http://client1:8000 init succeeded
+server-1   | [send_init] http://client2:8000 init succeeded
+server-1   | [send_init] http://client3:8000 init succeeded
+server-1   | {"schema":{"schema_version":"1.1.0","generated_at":"2026-05-21T19:09:37Z","config_path":"/project/configs/../temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/configs/resolved/scenario1_bootstrap.json","config_md5":"9d7556058a6c3cb18af9ad7ffdd7076b","seed":4869,"host":"e62cf905fd22","pid":1,"image_tag":null,"git_sha":null,"git_dirty":null},"aggregation":{"ci_method":"percentile","ci_level":0.95,"quantile_type":7,"estimates_scale":"natural"},"summary":[{"parameter":"(etaLcl,etaLvc)","median":0.067181327057,"p2.5":0.062802271234,"p97.5":0.081628916407},{"parameter":"CcPropSd","median":0.34119255701,"p2.5":0.32143031999,"p97.5":0.35285587728},{"parameter":"etaLcl","median":0.12690239318,"p2.5":0.12432021881,"p97.5":0.13812358888},{"parameter":"etaLvc","median":0.0370783114,"p2.5":0.032461312146,"p97.5":0.054075344664},{"parameter":"lcl","median":2.1941150127,"p2.5":2.1469775697,"p97.5":2.2503858915},{"parameter":"lka","median":2.2944018286,"p2.5":2.2405425332,"p97.5":2.4817788648},{"parameter":"lvc","median":3.0046924815,"p2.5":2.94447232,"p97.5":3.0198142551},{"parameter":"rho_(etaLcl,etaLvc)","median":0.97938556438,"p2.5":0.97652376421,"p97.5":0.98556450789}],"runs":[{"tag":"trial_081_20260521-190937","value":2237.9998,"counts":[22,22],"control":{"maxit":100,"factr":1000000000,"pgtol":0,"trace":0,"method":"L-BFGS-B"},"convergence":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","nat_par":{"lka":2.4941446108,"lcl":2.1460223689,"lvc":2.9435720522,"CcPropSd":0.33875217415,"etaLcl":0.13926230087,"etaLvc":0.04007805544,"(etaLcl,etaLvc)":0.073280354851,"rho_(etaLcl,etaLvc)":0.98088356917},"failed_clients":[],"attempt":1,"files":{"result":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_081_20260521-190937.json","trace":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_081_20260521-190937.csv","final":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_081_20260521-190937.csv"},"log_n":22,"execution_state":"completed","trial":81,"attempts":1},{"tag":"trial_082_20260521-191225","value":2241.0399,"counts":[24,24],"control":{"maxit":100,"factr":1000000000,"pgtol":0,"trace":0,"method":"L-BFGS-B"},"convergence":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","nat_par":{"lka":2.2371439834,"lcl":2.1555743772,"lvc":2.9525747305,"CcPropSd":0.35298492665,"etaLcl":0.12413389037,"etaLvc":0.036922829912,"(etaLcl,etaLvc)":0.066299004792,"rho_(etaLcl,etaLvc)":0.97929680192},"failed_clients":[],"attempt":1,"files":{"result":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_082_20260521-191225.json","trace":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_082_20260521-191225.csv","final":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_082_20260521-191225.csv"},"log_n":24,"execution_state":"completed","trial":82,"attempts":1},{"tag":"trial_083_20260521-191527","value":2212.9821,"counts":[21,21],"control":{"maxit":100,"factr":1000000000,"pgtol":0,"trace":0,"method":"L-BFGS-B"},"convergence":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","nat_par":{"lka":2.2944018286,"lcl":2.2174687919,"lvc":3.0090359831,"CcPropSd":0.35169443296,"etaLcl":0.12690239318,"etaLvc":0.0370783114,"(etaLcl,etaLvc)":0.067181327057,"rho_(etaLcl,etaLvc)":0.97938556438},"failed_clients":[],"attempt":1,"files":{"result":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_083_20260521-191527.json","trace":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_083_20260521-191527.csv","final":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_083_20260521-191527.csv"},"log_n":21,"execution_state":"completed","trial":83,"attempts":1},{"tag":"trial_084_20260521-191805","value":2142.8427,"counts":[22,22],"control":{"maxit":100,"factr":1000000000,"pgtol":0,"trace":0,"method":"L-BFGS-B"},"convergence":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","nat_par":{"lka":2.37048715,"lcl":2.254043347,"lvc":3.0046924815,"CcPropSd":0.31950566953,"etaLcl":0.12787518091,"etaLvc":0.03196558795,"(etaLcl,etaLvc)":0.062413745283,"rho_(etaLcl,etaLvc)":0.97621564891},"failed_clients":[],"attempt":1,"files":{"result":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_084_20260521-191805.json","trace":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_084_20260521-191805.csv","final":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_084_20260521-191805.csv"},"log_n":22,"execution_state":"completed","trial":84,"attempts":1},{"tag":"trial_085_20260521-192053","value":2203.1106,"counts":[34,34],"control":{"maxit":100,"factr":1000000000,"pgtol":0,"trace":0,"method":"L-BFGS-B"},"convergence":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","nat_par":{"lka":2.2711294813,"lcl":2.1941150127,"lvc":3.0210118409,"CcPropSd":0.34119255701,"etaLcl":0.12599717476,"etaLvc":0.055630599022,"(etaLcl,etaLvc)":0.082556534357,"rho_(etaLcl,etaLvc)":0.9860846122},"failed_clients":[],"attempt":1,"files":{"result":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_085_20260521-192053.json","trace":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_085_20260521-192053.csv","final":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_085_20260521-192053.csv"},"log_n":34,"execution_state":"completed","trial":85,"attempts":1}],"trial_status":[{"trial":81,"execution_state":"completed","converged":true,"attempts":1,"convergence":0,"value":2237.9998,"eval_fn":22,"eval_gr":22,"log_n":22,"failed_clients_n":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","result_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_081_20260521-190937.json","trace_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_081_20260521-190937.csv","final_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_081_20260521-190937.csv"},{"trial":82,"execution_state":"completed","converged":true,"attempts":1,"convergence":0,"value":2241.0399,"eval_fn":24,"eval_gr":24,"log_n":24,"failed_clients_n":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","result_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_082_20260521-191225.json","trace_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_082_20260521-191225.csv","final_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_082_20260521-191225.csv"},{"trial":83,"execution_state":"completed","converged":true,"attempts":1,"convergence":0,"value":2212.9821,"eval_fn":21,"eval_gr":21,"log_n":21,"failed_clients_n":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","result_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_083_20260521-191527.json","trace_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_083_20260521-191527.csv","final_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_083_20260521-191527.csv"},{"trial":84,"execution_state":"completed","converged":true,"attempts":1,"convergence":0,"value":2142.8427,"eval_fn":22,"eval_gr":22,"log_n":22,"failed_clients_n":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","result_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_084_20260521-191805.json","trace_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_084_20260521-191805.csv","final_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_084_20260521-191805.csv"},{"trial":85,"execution_state":"completed","converged":true,"attempts":1,"convergence":0,"value":2203.1106,"eval_fn":34,"eval_gr":34,"log_n":34,"failed_clients_n":0,"message":"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH","result_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_result_trial_085_20260521-192053.json","trace_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/optim_trace_trial_085_20260521-192053.csv","final_file":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/final_params_trial_085_20260521-192053.csv"}],"info":{"run_id":"20260521-190937","log_base_dir":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated","scenario":"scenario1/raw_runs","total_trials":5,"successes":5,"failures":0,"nonconverged_count":0,"nonconverged_trials":[],"convergence_missing_count":0,"seed_base":4869,"B_per_client":500,"duration_sec":941.0629146099,"host":"e62cf905fd22","image_tag":null,"communication":{"generated_at":"2026-05-21T19:25:13Z","totals":{"requests":741,"request_bytes":825207,"response_bytes":188187,"total_bytes":1013394,"retries":0},"init":{"requests":3,"request_bytes":8139,"response_bytes":1161,"total_bytes":9300,"retries":0,"median_elapsed_sec":0.36528372765},"init_round_latency":{"n_rounds":1,"median_round_wall_sec":0.36636900902,"p95_round_wall_sec":0.36636900902},"run":{"requests":0,"request_bytes":0,"response_bytes":0,"total_bytes":0,"retries":0,"median_elapsed_sec":"NA"},"run_bootstrap":{"requests":738,"request_bytes":817068,"response_bytes":187026,"total_bytes":1004094,"retries":0,"median_elapsed_sec":3.6433427334},"round_latency":{"n_rounds":246,"median_round_wall_sec":3.7518173456,"p95_round_wall_sec":4.0270604491},"timing_split":{"n_rounds":246,"rounds_with_compute":246,"total_round_wall_sec":930.0722522736,"total_round_compute_wall_sec":921.818,"total_round_comm_overhead_wall_sec":8.2542522736,"comm_overhead_ratio":0.0088748505865,"compute_ratio":0.99112514941}},"communication_files":{"csv":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/comm_metrics.csv","json":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/comm_metrics.json"},"output_files":{"bootstrap_summary_csv":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/bootstrap_summary.csv","bootstrap_summary_json":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/bootstrap_summary.json","trial_status_csv":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/trial_status.csv","failed_trials_csv":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/failed_trials.csv","trial_estimates_wide_csv":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/trial_estimates_wide.csv","trial_estimates_long_csv":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/trial_estimates_long.csv","result_json":"/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260521-190937/result.json"}}}
+[Kserver-1 exited with code 0
+Aborting on container exit...
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Stopped
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Stopped
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Stopped
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Stopped
+time="2026-05-22T04:25:23+09:00" level=warning msg="The \"SERVER_CONFIG_PATH\" variable is not set. Defaulting to a blank string."
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Stopped
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Removing
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-server-1  Removed
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Stopping
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Stopped
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Removing
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Stopped
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Removing
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Stopped
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Removing
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client2-1  Removed
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client3-1  Removed
+ Container defboot_design_change_n403030_wtmclu_scenario1_81_85-client1-1  Removed
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site3_net  Removing
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site1_net  Removing
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site2_net  Removing
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site3_net  Removed
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site2_net  Removed
+ Network defboot_design_change_n403030_wtmclu_scenario1_81_85_site1_net  Removed

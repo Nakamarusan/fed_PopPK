@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-05-22T16:34:27Z",
+  "totals": {
+    "requests": 951,
+    "request_bytes": 1058961,
+    "response_bytes": 241207,
+    "total_bytes": 1300168,
+    "retries": 0
+  },
+  "init": {
+    "requests": 3,
+    "request_bytes": 8139,
+    "response_bytes": 1161,
+    "total_bytes": 9300,
+    "retries": 0,
+    "median_elapsed_sec": 0.38825726509
+  },
+  "init_round_latency": {
+    "n_rounds": 1,
+    "median_round_wall_sec": 0.3914847374,
+    "p95_round_wall_sec": 0.3914847374
+  },
+  "run": {
+    "requests": 0,
+    "request_bytes": 0,
+    "response_bytes": 0,
+    "total_bytes": 0,
+    "retries": 0,
+    "median_elapsed_sec": "NA"
+  },
+  "run_bootstrap": {
+    "requests": 948,
+    "request_bytes": 1050822,
+    "response_bytes": 240046,
+    "total_bytes": 1290868,
+    "retries": 0,
+    "median_elapsed_sec": 3.6591198444
+  },
+  "round_latency": {
+    "n_rounds": 316,
+    "median_round_wall_sec": 3.7775365114,
+    "p95_round_wall_sec": 4.069124639
+  },
+  "timing_split": {
+    "n_rounds": 316,
+    "rounds_with_compute": 316,
+    "total_round_wall_sec": 1201.0570397377,
+    "total_round_compute_wall_sec": 1190.7421,
+    "total_round_comm_overhead_wall_sec": 10.3149397377,
+    "comm_overhead_ratio": 0.0085882180416,
+    "compute_ratio": 0.99141178196
+  }
+}

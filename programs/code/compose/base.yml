@@ -1,0 +1,129 @@
+x-client-env: &client-env
+  PORT: 8000
+  CLIENT_MODE: standard
+  RENV_PROJECT: /project
+  HOME: /tmp
+  XDG_CACHE_HOME: /tmp/.cache
+  RENV_PATHS_ROOT: /tmp/renv
+  # Avoid nested thread oversubscription; pnd parallelism is controlled by GRAD_CORES.
+  OMP_NUM_THREADS: 1
+  OPENBLAS_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+  NUMEXPR_NUM_THREADS: 1
+  VECLIB_MAXIMUM_THREADS: 1
+  MALLOC_ARENA_MAX: 2
+  CLIENT_GC_EVERY: ${CLIENT_GC_EVERY:-20}
+
+x-server-env: &server-env
+  RENV_PROJECT: /project
+  HOME: /tmp
+  XDG_CACHE_HOME: /tmp/.cache
+  RENV_PATHS_ROOT: /tmp/renv
+  SCENARIO: ${SCENARIO:-scenario1}
+  SERVER_CONFIG: ${SERVER_CONFIG:-standard.json}
+  OMP_NUM_THREADS: 1
+  OPENBLAS_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+  MALLOC_ARENA_MAX: 2
+  SERVER_GC_EVERY: ${SERVER_GC_EVERY:-1}
+  SERVER_POST_CORES: ${SERVER_POST_CORES:-3}
+
+x-client-base: &client-base
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile.app
+  user: "${UID:-1000}:${GID:-1000}"
+  working_dir: /project
+  entrypoint: ["Rscript", "-e", "plumber::plumb('/project/apps/client/plumber.R')$$run(host='0.0.0.0', port=as.integer(Sys.getenv('PORT','8000')))" ]
+  environment: *client-env
+  depends_on: []
+  volumes:
+    - ../apps:/project/apps:ro
+    - ../R:/project/R:ro
+
+x-server-base: &server-base
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile.app
+  user: "${UID:-1000}:${GID:-1000}"
+  working_dir: /project
+  depends_on:
+    - client1
+    - client2
+    - client3
+  environment: *server-env
+  volumes:
+    - ../apps:/project/apps:ro
+    - ../R:/project/R:ro
+    - ../configs:/project/configs:ro
+    - ../result:/project/result
+  entrypoint: ["Rscript", "/project/apps/server/main.R", "--config", "/project/configs/${SERVER_CONFIG:-standard.json}"]
+
+services:
+  client1:
+    <<: *client-base
+    cpus: ${CLIENT1_CPUS:-6}
+    environment:
+      <<: *client-env
+      GRAD_CORES: ${CLIENT1_GRAD_CORES:-6}
+    volumes:
+      - ../apps:/project/apps:ro
+      - ../R:/project/R:ro
+      - ../data/splits/${SCENARIO:-scenario1}/data1_1.csv:/project/data/data1_1.csv:ro
+    networks:
+      - site1_net
+
+  client2:
+    <<: *client-base
+    cpus: ${CLIENT2_CPUS:-6}
+    environment:
+      <<: *client-env
+      GRAD_CORES: ${CLIENT2_GRAD_CORES:-6}
+    volumes:
+      - ../apps:/project/apps:ro
+      - ../R:/project/R:ro
+      - ../data/splits/${SCENARIO:-scenario1}/data1_2.csv:/project/data/data1_2.csv:ro
+    networks:
+      - site2_net
+
+  client3:
+    <<: *client-base
+    cpus: ${CLIENT3_CPUS:-6}
+    environment:
+      <<: *client-env
+      GRAD_CORES: ${CLIENT3_GRAD_CORES:-6}
+    volumes:
+      - ../apps:/project/apps:ro
+      - ../R:/project/R:ro
+      - ../data/splits/${SCENARIO:-scenario1}/data1_3.csv:/project/data/data1_3.csv:ro
+    networks:
+      - site3_net
+
+  server:
+    <<: *server-base
+    cpus: ${SERVER_CPUS:-3}
+    networks:
+      - site1_net
+      - site2_net
+      - site3_net
+
+networks:
+  # Client-service isolation:
+  # - each client belongs to only one site-specific network
+  # - server joins all site-specific networks
+  # This blocks direct client<->client communication while allowing server<->client.
+  site1_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SITE1_SUBNET:-172.31.11.0/24}
+  site2_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SITE2_SUBNET:-172.31.12.0/24}
+  site3_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SITE3_SUBNET:-172.31.13.0/24}

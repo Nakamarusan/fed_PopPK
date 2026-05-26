@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-05-21 13:38:30",
+  "script": "/project/analysis/entrypoints/run_base_centralized_fit.R",
+  "input_dir": "/project/inputs/data/scenario2/base",
+  "output_dir": "/project/results/runs/scenario2/standard/centralized/raw",
+  "config_path": "/project/analysis/configs/resolved/scenario2_standard.json",
+  "split_files": ["/project/inputs/data/scenario2/base/data1_1.csv", "/project/inputs/data/scenario2/base/data1_2.csv", "/project/inputs/data/scenario2/base/data1_3.csv"],
+  "n_patients": {
+    "ALL": 100,
+    "Site1": 40,
+    "Site2": 30,
+    "Site3": 30
+  },
+  "model": "deferiprone oral 1-compartment base model; no covariate model; DV in umol/L",
+  "control": {
+    "outerOpt": "L-BFGS-B",
+    "print": 0,
+    "maxOuterIterations": 100,
+    "lbfgsPgtol": 0,
+    "lbfgsFactr": 1000000000,
+    "covMethod": "",
+    "sdLowerFact": 0.001,
+    "diagOmegaBoundLower": 1,
+    "diagOmegaBoundUpper": 1
+  },
+  "outputs": {
+    "fit_objects": "/project/results/runs/scenario2/standard/centralized/raw/fit_objects",
+    "estimates_csv": "/project/results/runs/scenario2/standard/centralized/raw/fit_estimates.csv",
+    "pooled_csv": "/project/results/runs/scenario2/standard/centralized/raw/pooled_summary.csv"
+  }
+}

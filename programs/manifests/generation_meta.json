@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-05-21 11:51:35 UTC",
+  "source": {
+    "pmcid": "PMC5306498",
+    "doi": "10.1111/bcp.13134",
+    "title": "Population pharmacokinetics and dosing recommendations for the use of deferiprone in children younger than 6 years of age",
+    "accepted_manuscript_url": "https://discovery.ucl.ac.uk/1516573/1/pasqua_bcp13134.pdf"
+  },
+  "design": {
+    "dose_mgkg": 25,
+    "single_oral_dose_time_h": 0,
+    "sample_times_h": {
+      "D1": [0.167, 1.167, 4.5],
+      "D2": [0.333, 1.25, 5.5],
+      "D3": [0.83, 1.416, 6]
+    },
+    "design_counts": {
+      "D1": 40,
+      "D2": 30,
+      "D3": 30
+    },
+    "n_subjects": 100
+  },
+  "model": {
+    "structure": "one-compartment oral, first-order absorption, first-order elimination",
+    "solver": {
+      "package": "rxode2",
+      "model_builder": "rxode2::rxode2",
+      "ode_solver": "rxode2::rxSolve"
+    },
+    "units": {
+      "dose": "mg",
+      "concentration_dv": "umol/L",
+      "concentration_dv_mg_l": "mg/L"
+    },
+    "wt_ref_kg": 15.8,
+    "weight_distribution": {
+      "mean_kg": 16.08,
+      "sd_kg": 3.18,
+      "lower_kg": 11,
+      "upper_kg": 22.5
+    },
+    "tvcl_l_h": 8.3,
+    "tvv_l": 18.7,
+    "tvka_h": 9.13,
+    "theta_wt_cl": 0.75,
+    "theta_wt_v": 1,
+    "omega": [
+      [0.0644, 0.031],
+      [0.031, 0.0392]
+    ],
+    "omega_rho_cl_v": 0.61698659249,
+    "prop_var": 0.0953,
+    "prop_sd": 0.30870698081,
+    "molecular_weight_g_mol": 139.15
+  },
+  "seeds": {
+    "design": 20260511,
+    "weight": 20260512,
+    "eta": 20260513,
+    "eps": 20260514,
+    "assign": 20260515
+  },
+  "outputs": {
+    "all_data": "/project/data/all/deferiprone_single_dose_25mgkg.csv",
+    "split_base_dir": "/project/data/base",
+    "id_params": "/project/data/meta/id_params.csv",
+    "design_time_check": "/project/programs/checks/design_time_check.csv",
+    "dv_time_summary": "/project/results/reports/tables/dv_time_summary.csv",
+    "figures": [
+      "/project/results/reports/figures/dv_time_by_design.png",
+      "/project/results/reports/figures/dv_time_all_designs.png"
+    ]
+  }
+}

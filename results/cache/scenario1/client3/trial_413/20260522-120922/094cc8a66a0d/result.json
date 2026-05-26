@@ -1,0 +1,13 @@
+{
+  "objf": 620.7077939616,
+  "grad": {
+    "lka": -1.7986480635,
+    "lcl": 48.4664016399,
+    "lvc": -97.9463390408,
+    "CcPropSd": 11.2999040119,
+    "pchol__omega_cl_v__etaLcl__etaLcl": 6.3383859072,
+    "pchol__omega_cl_v__etaLcl__etaLvc": 0.42141967392,
+    "pchol__omega_cl_v__etaLvc__etaLvc": -5.7737504229
+  },
+  "ok": true
+}

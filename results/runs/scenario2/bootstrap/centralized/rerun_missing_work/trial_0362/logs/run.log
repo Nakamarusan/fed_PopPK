@@ -1,0 +1,8 @@
+{
+  "scenario": "scenario2",
+  "attempted": 1,
+  "converged": 1,
+  "raw_dir": "/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario2/bootstrap/centralized/rerun_missing_work/trial_0362/raw",
+  "aggregate_dir": "/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario2/bootstrap/centralized/rerun_missing_work/trial_0362/aggregate",
+  "reporting_dir": "/project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario2/bootstrap/centralized/rerun_missing_work/trial_0362/reporting"
+}

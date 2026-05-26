@@ -1,0 +1,13 @@
+scenario,Site,design,n_subjects
+scenario1,Site1,D1,40
+scenario1,Site2,D2,30
+scenario1,Site3,D3,30
+scenario2,Site1,D1,17
+scenario2,Site1,D2,9
+scenario2,Site1,D3,14
+scenario2,Site2,D1,13
+scenario2,Site2,D2,8
+scenario2,Site2,D3,9
+scenario2,Site3,D1,10
+scenario2,Site3,D2,13
+scenario2,Site3,D3,7

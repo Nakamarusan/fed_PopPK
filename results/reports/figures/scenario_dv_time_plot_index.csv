@@ -1,0 +1,3 @@
+scenario,png,svg,nested_png,nested_svg
+scenario1,/project/results/reports/figures/scenario1_dv_time_by_design.png,/project/results/reports/figures/scenario1_dv_time_by_design.svg,/project/results/reports/figures/scenario1/dv_time_by_design.png,/project/results/reports/figures/scenario1/dv_time_by_design.svg
+scenario2,/project/results/reports/figures/scenario2_dv_time_by_design.png,/project/results/reports/figures/scenario2_dv_time_by_design.svg,/project/results/reports/figures/scenario2/dv_time_by_design.png,/project/results/reports/figures/scenario2/dv_time_by_design.svg

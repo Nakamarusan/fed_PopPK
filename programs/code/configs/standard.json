@@ -1,0 +1,57 @@
+{
+  "clients": {
+    "http://client1:8000": "/project/data/data1_1.csv",
+    "http://client2:8000": "/project/data/data1_2.csv",
+    "http://client3:8000": "/project/data/data1_3.csv"
+  },
+  "modelInfo": {
+    "modelName": "PK_1cmt",
+    "administration": "iv",
+    "iiv": {
+      "lcl": true,
+      "lvc": true,
+      "cor": false
+    },
+    "res": "mix"
+  },
+  "initPar": {
+    "lcl": -0.3667253,
+    "lvc": 0.0,
+    "etaLcl": 0.0861777,
+    "etaLvc": 0.0861777,
+    "CcPropSd": 0.1,
+    "CcAddSd": 0.05
+  },
+  "lower": {
+    "lcl": null,
+    "lvc": null,
+    "etaLcl": 0.0001,
+    "etaLvc": 0.0001,
+    "CcPropSd": 0.001,
+    "CcAddSd": 0.001
+  },
+  "upper": {
+    "lcl": null,
+    "lvc": null,
+    "etaLcl": null,
+    "etaLvc": null,
+    "CcPropSd": null,
+    "CcAddSd": null
+  },
+  "logging": {
+    "base_dir": "/project/result/logs",
+    "scenario": "run",
+    "save_par_log": true
+  },
+  "optimControl": {
+    "method": "L-BFGS-B",
+    "return_grad": true,
+    "grad_cores": 6,
+    "maxit": 100,
+    "pgtol": 0.005,
+    "factr": 100000000,
+    "maxls": 5,
+    "stepmax": 0.5,
+    "trace": 0
+  }
+}

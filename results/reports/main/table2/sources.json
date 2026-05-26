@@ -1,0 +1,14 @@
+{
+  "title": "Table 2. Parameter estimates and eta-shrinkage under Federated, Weighted, and Centralized approaches.",
+  "artifacts": ["raw.csv", "table2.csv", "table2.md"],
+  "sources": [
+    "runs/scenario1/standard/centralized/reporting/fit_estimates.csv",
+    "runs/scenario1/standard/centralized/reporting/pooled_summary.csv",
+    "runs/scenario1/standard/federated/reporting/federated_summary_natural_sigma2.csv",
+    "runs/scenario1/standard/federated/posthoc_eval/federated_pooled_eval.csv",
+    "runs/scenario2/standard/centralized/reporting/fit_estimates.csv",
+    "runs/scenario2/standard/centralized/reporting/pooled_summary.csv",
+    "runs/scenario2/standard/federated/reporting/federated_summary_natural_sigma2.csv",
+    "runs/scenario2/standard/federated/posthoc_eval/federated_pooled_eval.csv"
+  ]
+}

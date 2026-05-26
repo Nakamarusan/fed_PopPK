@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-05-21 14:55:45",
+  "scenario": "scenario2",
+  "config": "/project/analysis/configs/resolved/scenario2_bootstrap_centralized.json",
+  "trial_root": "/project/inputs/data/scenario2/bootstrap",
+  "output_root": "/project/results/runs/scenario2/bootstrap/centralized/rerun_missing_work/trial_0331",
+  "trial_start": 331,
+  "trial_end": 331,
+  "workers": 1,
+  "model": "deferiprone oral 1-compartment base model; centralized pooled bootstrap",
+  "control": {
+    "outerOpt": "L-BFGS-B",
+    "print": 0,
+    "maxOuterIterations": 100,
+    "lbfgsPgtol": 0,
+    "lbfgsFactr": 1000000000,
+    "covMethod": "",
+    "sdLowerFact": 0.001,
+    "diagOmegaBoundLower": 1,
+    "diagOmegaBoundUpper": 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "ts": "2026-05-23 18:20:24",
+  "dataPath": "/project/inputs/data/scenario2/base/data1_1.csv",
+  "nrow": 160,
+  "ncol": 17,
+  "client": "a5840df0c601",
+  "grad_cores": 6,
+  "bootstrap": {
+    "B": 500,
+    "seed_base": 4869
+  }
+}

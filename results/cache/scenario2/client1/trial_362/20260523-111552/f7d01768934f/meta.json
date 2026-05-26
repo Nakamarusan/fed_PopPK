@@ -1,0 +1,13 @@
+{
+  "ts_start": "2026-05-23 11:18:51",
+  "ts_end": "2026-05-23 11:18:55",
+  "elapsed": 3.797535181,
+  "client": "f7d01768934f",
+  "resample": {
+    "mode": "bootstrap",
+    "seed_base": 4869,
+    "trial_id": 362,
+    "stamp": "20260523-111552",
+    "sample_path": "/project/inputs/data/scenario2/bootstrap/trial_0362/data1_1.rds"
+  }
+}

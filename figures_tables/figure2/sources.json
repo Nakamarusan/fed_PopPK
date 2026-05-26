@@ -1,0 +1,8 @@
+{
+  "title": "Figure 2. Site-wise distributions of simulated individual CL, V, and body weight.",
+  "artifacts": ["figure2.pdf", "figure2.png", "figure2.svg"],
+  "sources": [
+    "data/scenario1/meta/id_params.csv",
+    "data/scenario2/meta/id_params.csv"
+  ]
+}

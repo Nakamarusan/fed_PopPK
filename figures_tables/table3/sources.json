@@ -1,0 +1,14 @@
+{
+  "successful_trials": {
+    "scenario1_Federated": 499,
+    "scenario1_Centralized": 500,
+    "scenario2_Federated": 500,
+    "scenario2_Centralized": 497
+  },
+  "scenario1_federated_raw_runs": "results/runs/scenario1/bootstrap/federated/scenario1/raw_runs",
+  "scenario1_centralized_summary": "results/runs/scenario1/bootstrap/centralized/aggregate/summary_converged_only.csv",
+  "scenario2_federated_raw_runs": "results/runs/scenario2/bootstrap/federated/scenario2/raw_runs",
+  "scenario2_centralized_summary": "results/runs/scenario2/bootstrap/centralized/aggregate/summary_converged_only.csv",
+  "note": "Successful converged bootstrap trials only; nonconverged trials are excluded from percentile summaries.",
+  "artifacts": ["table3.csv", "table3.md"]
+}

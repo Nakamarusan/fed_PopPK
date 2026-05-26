@@ -1,0 +1,8 @@
+{
+  "title": "Figure 3. Site-specific and aggregated gradient trajectories during optimization in the Federated approach.",
+  "artifacts": ["figure3.pdf", "figure3.png", "figure3.svg"],
+  "sources": [
+    "runs/scenario1/standard/federated/latest_run.txt",
+    "runs/scenario2/standard/federated/latest_run.txt"
+  ]
+}

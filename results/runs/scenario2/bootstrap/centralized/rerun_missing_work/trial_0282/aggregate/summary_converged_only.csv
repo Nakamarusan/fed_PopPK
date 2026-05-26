@@ -1,0 +1,9 @@
+parameter,n_converged,median,ci_lower,ci_upper
+KA,0,,,
+CL,0,,,
+V,0,,,
+omega2_cl,0,,,
+omega_cl_v,0,,,
+omega2_v,0,,,
+rho_cl_v,0,,,
+sigma2_prop,0,,,

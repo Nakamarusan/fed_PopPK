@@ -1,0 +1,2 @@
+"run_id","convergence","message","objective_value","KA","CL","V","omega2_cl","omega_cl_v","omega2_v","rho_cl_v","sigma_prop","sigma2_prop","sigma2_prop_x1e3","maxit","pgtol","factr","trace","grad_cores"
+"20260521-131333",0,"CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",2220.6286,9.63474836053453,8.76342508000991,19.3543583434257,0.10549531794,0.061241396937,0.035827319849,0.9961421925,0.35768024561,0.12793515809963,127.93515809963,100,0,1000000000,0,3

@@ -1,0 +1,22 @@
+{
+  "scenario": "scenario1",
+  "trial_id": 461,
+  "seed_base": 4869,
+  "trial_seed_master": 4614869,
+  "generated_at": "2026-05-21 14:25:14",
+  "data1_1": {
+    "site_seed": 4615869,
+    "n_rows": 160,
+    "n_subjects": 40
+  },
+  "data1_2": {
+    "site_seed": 4616869,
+    "n_rows": 120,
+    "n_subjects": 30
+  },
+  "data1_3": {
+    "site_seed": 4617869,
+    "n_rows": 120,
+    "n_subjects": 30
+  }
+}

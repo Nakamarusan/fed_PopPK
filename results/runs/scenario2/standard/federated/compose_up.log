@@ -1,0 +1,214 @@
+Compose now can delegate build to bake for better performances
+Just set COMPOSE_BAKE=true
+#0 building with "default" instance using docker driver
+
+#1 [client1 internal] load build definition from Dockerfile.app
+#1 transferring dockerfile: 778B done
+#1 DONE 0.0s
+
+#2 [client2 internal] load build definition from Dockerfile.app
+#2 transferring dockerfile: 778B done
+#2 DONE 0.0s
+
+#3 [client3 internal] load build definition from Dockerfile.app
+#3 transferring dockerfile: 778B done
+#3 DONE 0.0s
+
+#4 [client3 internal] load metadata for docker.io/fedpoppk/base:0.1.0
+#4 DONE 0.0s
+
+#5 [client1 internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [client2 internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [client3 internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [client2 1/8] FROM docker.io/fedpoppk/base:0.1.0
+#8 DONE 0.0s
+
+#9 [client1 internal] load build context
+#9 transferring context: 736.51kB 0.3s done
+#9 DONE 0.3s
+
+#10 [client3 internal] load build context
+#10 transferring context: 736.51kB 0.3s done
+#10 DONE 0.3s
+
+#11 [client2 internal] load build context
+#11 transferring context: 736.51kB 0.3s done
+#11 DONE 0.3s
+
+#12 [client3 5/8] COPY apps/ apps/
+#12 CACHED
+
+#13 [client3 6/8] COPY R/ R/
+#13 CACHED
+
+#14 [client3 7/8] COPY analysis/ analysis/
+#14 CACHED
+
+#15 [client3 4/8] RUN Rscript -e "options(renv.consent=TRUE, Ncpus=parallel::detectCores());                 renv::restore(prompt=FALSE)"
+#15 CACHED
+
+#16 [client3 2/8] WORKDIR /project
+#16 CACHED
+
+#17 [client3 3/8] COPY renv.lock .Rprofile renv/activate.R ./
+#17 CACHED
+
+#18 [client1 8/8] RUN mkdir -p /project/configs/modes /project/data /project/artifacts /project/result
+#18 CACHED
+
+#19 [client3] exporting to image
+#19 exporting layers done
+#19 writing image sha256:3d40d5fb65faa816f8351f03ef6b81fbab6061e839e35ae599f0d49533c0214f done
+#19 naming to docker.io/library/defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3 0.0s done
+#19 DONE 0.0s
+
+#20 [client2] exporting to image
+#20 exporting layers done
+#20 writing image sha256:a514730fb7fa306b91672d6831f0f9d3c5a1701b14658ee56f39be5a1f2f455f done
+#20 naming to docker.io/library/defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2 0.0s done
+#20 DONE 0.0s
+
+#21 [client1] exporting to image
+#21 exporting layers done
+#21 writing image sha256:8bb80d9a3dfcfc60ecfa9029f603934de2a5c1041bc655dfb54e452552938518 done
+#21 naming to docker.io/library/defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1 0.1s done
+#21 DONE 0.1s
+
+#22 [client2] resolving provenance for metadata file
+#22 DONE 0.0s
+
+#23 [client3] resolving provenance for metadata file
+#23 DONE 0.0s
+
+#24 [client1] resolving provenance for metadata file
+#24 DONE 0.0s
+
+#25 [server internal] load build definition from Dockerfile.app
+#25 transferring dockerfile: 778B done
+#25 DONE 0.0s
+
+#4 [server internal] load metadata for docker.io/fedpoppk/base:0.1.0
+#4 DONE 0.0s
+
+#26 [server internal] load .dockerignore
+#26 transferring context: 2B done
+#26 DONE 0.0s
+
+#8 [server 1/8] FROM docker.io/fedpoppk/base:0.1.0
+#8 DONE 0.0s
+
+#27 [server internal] load build context
+#27 transferring context: 736.51kB 0.2s done
+#27 DONE 0.3s
+
+#28 [server 3/8] COPY renv.lock .Rprofile renv/activate.R ./
+#28 CACHED
+
+#29 [server 5/8] COPY apps/ apps/
+#29 CACHED
+
+#30 [server 4/8] RUN Rscript -e "options(renv.consent=TRUE, Ncpus=parallel::detectCores());                 renv::restore(prompt=FALSE)"
+#30 CACHED
+
+#31 [server 7/8] COPY analysis/ analysis/
+#31 CACHED
+
+#16 [server 2/8] WORKDIR /project
+#16 CACHED
+
+#32 [server 6/8] COPY R/ R/
+#32 CACHED
+
+#33 [server 8/8] RUN mkdir -p /project/configs/modes /project/data /project/artifacts /project/result
+#33 CACHED
+
+#34 [server] exporting to image
+#34 exporting layers done
+#34 writing image sha256:7ac2ae3b2ebf7fb48da0d868aab9c91dbde2a22ee330b14fa43babcd09d0fded done
+#34 naming to docker.io/library/defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server 0.0s done
+#34 DONE 0.0s
+
+#35 [server] resolving provenance for metadata file
+#35 DONE 0.0s
+ client1  Built
+ client2  Built
+ client3  Built
+ server  Built
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site2_net  Creating
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site2_net  Created
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site3_net  Creating
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site3_net  Created
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site1_net  Creating
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site1_net  Created
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Creating
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Creating
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Creating
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Created
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Created
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Created
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Creating
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Created
+Attaching to client1-1, client2-1, client3-1, server-1
+server-1   | INFO [2026-05-21 13:38:33] initPar (natural): lka=2.21157, lcl=2.11626, lvc=2.92852, CcPropSd=0.30000, pchol__omega_cl_v__etaLcl__etaLcl=1.90749, pchol__omega_cl_v__etaLcl__etaLvc=-1.26926, pchol__omega_cl_v__etaLvc__etaLvc=1.84661
+server-1   | [send_init] http://client1:8000 failed (1/20): Couldn't connect to server [client1]:
+server-1   | Failed to connect to client1 port 8000 after 0 ms: Couldn't connect to server ... retrying in 5s
+server-1   | [send_init] http://client2:8000 failed (1/20): Couldn't connect to server [client2]:
+server-1   | Failed to connect to client2 port 8000 after 0 ms: Couldn't connect to server ... retrying in 5s
+client3-1  | Running plumber API at http://0.0.0.0:8000
+client3-1  | Running swagger Docs at http://127.0.0.1:8000/__docs__/
+client1-1  | Running plumber API at http://0.0.0.0:8000
+client1-1  | Running swagger Docs at http://127.0.0.1:8000/__docs__/
+client2-1  | Running plumber API at http://0.0.0.0:8000
+client2-1  | Running swagger Docs at http://127.0.0.1:8000/__docs__/
+client1-1  | ℹ parameter labels from comments are typically ignored in non-interactive mode
+client1-1  | ℹ Need to run with the source intact to parse comments
+client2-1  | ℹ parameter labels from comments are typically ignored in non-interactive mode
+client2-1  | ℹ Need to run with the source intact to parse comments
+server-1   | [send_init] http://client1:8000 init succeeded
+client3-1  | ℹ parameter labels from comments are typically ignored in non-interactive mode
+client3-1  | ℹ Need to run with the source intact to parse comments
+server-1   | [send_init] http://client2:8000 init succeeded
+server-1   | [send_init] http://client3:8000 init succeeded
+server-1   | [server_optimize] method=L-BFGS-B (client numerical gradient: TRUE)
+server-1   | Results saved under: /project/temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521/runs/scenario2/standard/federated/scenario2/raw_runs/run_20260521-133833
+[Kserver-1 exited with code 0
+Aborting on container exit...
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Removing
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-server-1  Removed
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Stopping
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Removing
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Removing
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Stopped
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Removing
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client1-1  Removed
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client2-1  Removed
+ Container defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2-client3-1  Removed
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site3_net  Removing
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site1_net  Removing
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site2_net  Removing
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site1_net  Removed
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site3_net  Removed
+ Network defval_design_change_n403030_wtmclustt10_nomix_site403_scenario2_site2_net  Removed

@@ -1,0 +1,76 @@
+Rerunning missing scenario2 trials: 132 142 152 162 172 182 192 202 212 222 232 242 252 262 271 272 281 282 291 292 301 302 311 312 321 322 331 332 341 342 351 352 361 362 371 372 381 382 391 392 401 402 411 412 421 422 431 432 441 442 451 452 461 462 471 472 481 482 491 492
+trial 0142: wrote result
+trial 0172: wrote result
+trial 0182: wrote result
+trial 0162: wrote result
+trial 0152: wrote result
+trial 0202: wrote result
+trial 0192: wrote result
+trial 0222: wrote result
+trial 0212: wrote result
+trial 0232: wrote result
+trial 0262: wrote result
+trial 0272: wrote result
+trial 0252: wrote result
+trial 0242: wrote result
+trial 0281: wrote result
+trial 0291: wrote result
+trial 0292: wrote result
+trial 0282: wrote result
+trial 0302: wrote result
+trial 0301: wrote result
+trial 0311: wrote result
+trial 0312: wrote result
+trial 0321: wrote result
+trial 0322: wrote result
+trial 0331: wrote result
+trial 0332: wrote result
+trial 0341: wrote result
+trial 0342: wrote result
+trial 0351: wrote result
+trial 0352: wrote result
+trial 0371: wrote result
+trial 0362: wrote result
+trial 0361: wrote result
+trial 0372: wrote result
+trial 0381: wrote result
+trial 0382: wrote result
+trial 0391: wrote result
+trial 0392: wrote result
+trial 0401: wrote result
+trial 0402: wrote result
+trial 0411: wrote result
+trial 0412: wrote result
+trial 0421: wrote result
+trial 0422: wrote result
+trial 0431: wrote result
+trial 0432: wrote result
+trial 0441: wrote result
+trial 0442: wrote result
+trial 0451: wrote result
+trial 0452: wrote result
+trial 0461: wrote result
+trial 0462: wrote result
+trial 0472: wrote result
+trial 0471: wrote result
+trial 0481: wrote result
+trial 0482: wrote result
+trial 0491: wrote result
+trial 0492: wrote result
+trial 0271: wrote failed marker
+trial 0132: wrote failed marker
+# Centralized Bootstrap Summary: scenario2
+
+- attempted trials: 500
+- converged trials: 497
+
+|parameter|n_converged|median|ci_lower|ci_upper|
+|---|---:|---:|---:|---:|
+|KA|497|9.50345|7.44364|12.7709|
+|CL|497|8.79042|8.13342|9.52928|
+|V|497|19.3341|17.9694|20.7125|
+|omega2_cl|497|0.103775|0.0690867|0.136419|
+|omega_cl_v|497|0.0600879|0.0375876|0.0830121|
+|omega2_v|497|0.0366543|0.0186658|0.0563166|
+|rho_cl_v|497|0.979118|0.960184|0.986259|
+|sigma2_prop|497|0.125094|0.0997991|0.157433|

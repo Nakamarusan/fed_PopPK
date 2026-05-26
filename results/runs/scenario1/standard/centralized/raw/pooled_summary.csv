@@ -1,0 +1,12 @@
+parameter,pooled_mean,between_var,within_var,total_var,definition,weight_basis
+theta_ka,55.4779025338835,2.45725695021193,,2.45725695021193,between-site variance of KA fixed effect on log scale,patients
+theta_cl,8.48359119517943,0.00422949610914222,,0.00422949610914222,between-site variance of CL fixed effect on log scale,patients
+theta_v,18.2240458658135,3.89034420685553e-05,,3.89034420685553e-05,between-site variance of V fixed effect on log scale,patients
+omega2_cl,,,0.074856063948714,,within-site variance component for CL IIV,patients
+omega_cl_v,,,0.0361481770295288,,within-site covariance component for CL/V IIV,patients
+omega2_v,,,0.029659586560201,,within-site variance component for V IIV,patients
+var_total_cl,,0.00422949610914222,0.074856063948714,0.0790855600578562,within omega2_cl plus between theta_cl,patients
+cov_total_cl_v,,0.000109779185843867,0.0361481770295288,0.0362579562153727,within omega_cl_v plus between theta_cl/theta_v covariance,patients
+var_total_v,,3.89034420685553e-05,0.029659586560201,0.0296984900022695,within omega2_v plus between theta_v,patients
+rho_total_cl_v,0.748148033413938,,,,"correlation implied by cov_total_cl_v, var_total_cl, and var_total_v",patients
+sigma_prop,0.354728110350068,,0.12583203227253,,pooled proportional residual SD from within-site variances,patients

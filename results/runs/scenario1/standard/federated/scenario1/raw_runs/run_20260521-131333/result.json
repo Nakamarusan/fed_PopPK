@@ -1,0 +1,336 @@
+{
+  "schema": {
+    "schema_version": "1.1.0",
+    "generated_at": "2026-05-21T13:13:33Z",
+    "config_path": "/project/analysis/configs/resolved/scenario1_standard.json",
+    "config_md5": "85327ec5fd69167588ba037f4bfac7ce",
+    "seed": 4869,
+    "host": "6f62d394d077",
+    "pid": 1,
+    "image_tag": null,
+    "git_sha": null,
+    "git_dirty": null
+  },
+  "par": [2.2653761843, 2.1705868194, 2.9629176315, 0.35768024561, 0.10549531794, 0.035827319849, 0.061241396937, 0.9961421925],
+  "parNames": ["lka", "lcl", "lvc", "CcPropSd", "etaLcl", "etaLvc", "(etaLcl,etaLvc)", "rho_(etaLcl,etaLvc)"],
+  "value": 2220.6286,
+  "convergence": 0,
+  "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+  "control": {
+    "maxit": 100,
+    "factr": 1000000000,
+    "pgtol": 0,
+    "trace": 0,
+    "method": "L-BFGS-B"
+  },
+  "natPar": {
+    "lka": 2.2653761843,
+    "lcl": 2.1705868194,
+    "lvc": 2.9629176315,
+    "CcPropSd": 0.35768024561,
+    "etaLcl": 0.10549531794,
+    "etaLvc": 0.035827319849,
+    "(etaLcl,etaLvc)": 0.061241396937,
+    "rho_(etaLcl,etaLvc)": 0.9961421925
+  },
+  "log": {},
+  "meta": {
+    "run_id": "20260521-131333",
+    "eps_pos": 1e-06,
+    "use_cor": true,
+    "clients": {
+      "http://client1:8000": "/project/inputs/data/scenario1/base/data1_1.csv",
+      "http://client2:8000": "/project/inputs/data/scenario1/base/data1_2.csv",
+      "http://client3:8000": "/project/inputs/data/scenario1/base/data1_3.csv"
+    },
+    "model": {
+      "modelName": "deferiprone_1cmt_oral_base",
+      "administration": "po",
+      "iiv": {
+        "lcl": true,
+        "lvc": true,
+        "cor": true
+      },
+      "res": "prop",
+      "customModel": "function() {\n  ini({\n    lka <- log(9.13)\n    lcl <- log(8.3)\n    lvc <- log(18.7)\n    CcPropSd <- c(0.0003, 0.3)\n    etaLcl + etaLvc ~ c(0.086, 0.030, 0.086)\n  })\n  model({\n    ka <- exp(lka)\n    cl <- exp(lcl + etaLcl)\n    vc <- exp(lvc + etaLvc)\n    Cc <- linCmt() * 1000 / 139.15\n    Cc ~ prop(CcPropSd)\n  })\n}"
+    },
+    "lower": {
+      "lka": "-Inf",
+      "lcl": "-Inf",
+      "lvc": "-Inf",
+      "CcPropSd": 0.0003,
+      "pchol__omega_cl_v__etaLcl__etaLcl": "-Inf",
+      "pchol__omega_cl_v__etaLcl__etaLvc": "-Inf",
+      "pchol__omega_cl_v__etaLvc__etaLvc": "-Inf"
+    },
+    "upper": {
+      "lka": "Inf",
+      "lcl": "Inf",
+      "lvc": "Inf",
+      "CcPropSd": "Inf",
+      "pchol__omega_cl_v__etaLcl__etaLcl": "Inf",
+      "pchol__omega_cl_v__etaLcl__etaLvc": "Inf",
+      "pchol__omega_cl_v__etaLvc__etaLvc": "Inf"
+    },
+    "richardson_eps": 1e-05,
+    "grad_cores": 3,
+    "seed": 4869,
+    "par_internal": {
+      "lka": 2.2653761843,
+      "lcl": 2.1705868194,
+      "lvc": 2.9629176315,
+      "CcPropSd": -1.0289549503,
+      "pchol__omega_cl_v__etaLcl__etaLcl": 5.9232313662,
+      "pchol__omega_cl_v__etaLcl__etaLvc": -59.9719487744,
+      "pchol__omega_cl_v__etaLvc__etaLvc": 2.2985101176
+    },
+    "communication": {
+      "generated_at": "2026-05-21T13:37:55Z",
+      "totals": {
+        "requests": 509,
+        "request_bytes": 166186,
+        "response_bytes": 121392,
+        "total_bytes": 287578,
+        "retries": 0
+      },
+      "init": {
+        "requests": 5,
+        "request_bytes": 11860,
+        "response_bytes": 189,
+        "total_bytes": 12049,
+        "retries": 0,
+        "median_elapsed_sec": 0.34973239899
+      },
+      "init_round_latency": {
+        "n_rounds": 1,
+        "median_round_wall_sec": 5.7929005623,
+        "p95_round_wall_sec": 5.7929005623
+      },
+      "run": {
+        "requests": 504,
+        "request_bytes": 154326,
+        "response_bytes": 121203,
+        "total_bytes": 275529,
+        "retries": 0,
+        "median_elapsed_sec": 4.3247226477
+      },
+      "run_bootstrap": {
+        "requests": 0,
+        "request_bytes": 0,
+        "response_bytes": 0,
+        "total_bytes": 0,
+        "retries": 0,
+        "median_elapsed_sec": "NA"
+      },
+      "round_latency": {
+        "n_rounds": 168,
+        "median_round_wall_sec": 8.6111649275,
+        "p95_round_wall_sec": 8.9825917363
+      },
+      "timing_split": {
+        "n_rounds": 168,
+        "rounds_with_compute": 168,
+        "total_round_wall_sec": 741.8585727215,
+        "total_round_compute_wall_sec": 737.297,
+        "total_round_comm_overhead_wall_sec": 4.5615727215,
+        "comm_overhead_ratio": 0.0061488441183,
+        "compute_ratio": 0.99385115588
+      }
+    },
+    "communication_files": {
+      "csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/comm_metrics.csv",
+      "json": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/comm_metrics.json"
+    },
+    "init_round": {
+      "round_id": 1,
+      "timing": {
+        "round_start_epoch_sec": 1779369218.2013016,
+        "round_end_epoch_sec": 1779369218.9299664,
+        "round_wall_sec": 0.72866487503,
+        "round_broadcast_window_sec": 0.35836410522,
+        "round_collect_barrier_sec": 0.37893247604,
+        "round_first_response_sec": 0.34973239899,
+        "round_compute_wall_sec": "NA",
+        "round_sync_wait_sec": "NA",
+        "round_exchange_compute_sec": 0,
+        "per_client": [
+          {
+            "client": "http://client1:8000",
+            "elapsed_sec": 0.34973239899,
+            "request_start_ts_utc": "2026-05-21T13:13:38.201301Z",
+            "request_end_ts_utc": "2026-05-21T13:13:38.551033Z",
+            "request_start_epoch_sec": 1779369218.2013016,
+            "request_end_epoch_sec": 1779369218.551034,
+            "curl_namelookup_sec": 1.5e-05,
+            "curl_connect_sec": 0.000128,
+            "curl_pretransfer_sec": 0.00016,
+            "curl_starttransfer_sec": 0.344954,
+            "curl_total_sec": 0.345003,
+            "curl_ttfb_sec": 0.344794,
+            "curl_response_transfer_sec": 4.9e-05,
+            "site_wait_sec": 0.37893247604,
+            "site_start_lag_sec": 0
+          },
+          {
+            "client": "http://client2:8000",
+            "elapsed_sec": 0.35802721977,
+            "request_start_ts_utc": "2026-05-21T13:13:38.341096Z",
+            "request_end_ts_utc": "2026-05-21T13:13:38.699124Z",
+            "request_start_epoch_sec": 1779369218.3410969,
+            "request_end_epoch_sec": 1779369218.6991241,
+            "curl_namelookup_sec": 1.5e-05,
+            "curl_connect_sec": 0.00012,
+            "curl_pretransfer_sec": 0.000145,
+            "curl_starttransfer_sec": 0.352941,
+            "curl_total_sec": 0.352982,
+            "curl_ttfb_sec": 0.352796,
+            "curl_response_transfer_sec": 4.1e-05,
+            "site_wait_sec": 0.23084235191,
+            "site_start_lag_sec": 0.13979530334
+          },
+          {
+            "client": "http://client3:8000",
+            "elapsed_sec": 0.37030076981,
+            "request_start_ts_utc": "2026-05-21T13:13:38.559665Z",
+            "request_end_ts_utc": "2026-05-21T13:13:38.929966Z",
+            "request_start_epoch_sec": 1779369218.5596657,
+            "request_end_epoch_sec": 1779369218.9299664,
+            "curl_namelookup_sec": 0.000419,
+            "curl_connect_sec": 0.00053,
+            "curl_pretransfer_sec": 0.000561,
+            "curl_starttransfer_sec": 0.36024,
+            "curl_total_sec": 0.360289,
+            "curl_ttfb_sec": 0.359679,
+            "curl_response_transfer_sec": 4.9e-05,
+            "site_wait_sec": 0,
+            "site_start_lag_sec": 0.35836410522
+          }
+        ]
+      }
+    },
+    "timing_sequence": {
+      "step1_setup_sec": 0.17408895493,
+      "step2_init_sec": 5.8966474533,
+      "step2_broadcast_window_sec": 0.35836410522,
+      "step2_collect_barrier_sec": 0.37893247604,
+      "step2_exchange_sec": 5.159350872,
+      "step3_poll_total_sec": 1455.762160778,
+      "step3_round_wall_total_sec": 1452.7037465572,
+      "step3_poll_overhead_total_sec": 3.0584142208,
+      "step3_broadcast_total_sec": 742.4004116058,
+      "step3_collect_barrier_total_sec": 716.808478117,
+      "step3_exchange_compute_total_sec": 0,
+      "step3_compute_critical_total_sec": 737.297,
+      "step3_sync_wait_total_sec": 715.4067465572,
+      "step4_aggregate_total_sec": 0.087358951569,
+      "step5_optimizer_internal_sec": 0.39363884926,
+      "step3_5_total_sec": 1456.7784843445,
+      "step6_finalize_sec": 0.079912900925,
+      "total_runtime_sec": 1462.9718608856,
+      "n_eval_calls": 168,
+      "n_eval_records": 168,
+      "n_fn_calls": 84,
+      "n_gr_calls": 84,
+      "n_optimizer_iterations": 84,
+      "n_rounds": 168
+    },
+    "timing_files": {
+      "eval_csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_eval.csv",
+      "eval_site_csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_eval_site.csv",
+      "csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_steps.csv",
+      "json": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_sequence.json"
+    },
+    "duration_sec": 1462.9718608856,
+    "host": "6f62d394d077",
+    "image_tag": null,
+    "communication.1": {
+      "generated_at": "2026-05-21T13:37:55Z",
+      "totals": {
+        "requests": 509,
+        "request_bytes": 166186,
+        "response_bytes": 121392,
+        "total_bytes": 287578,
+        "retries": 0
+      },
+      "init": {
+        "requests": 5,
+        "request_bytes": 11860,
+        "response_bytes": 189,
+        "total_bytes": 12049,
+        "retries": 0,
+        "median_elapsed_sec": 0.34973239899
+      },
+      "init_round_latency": {
+        "n_rounds": 1,
+        "median_round_wall_sec": 5.7929005623,
+        "p95_round_wall_sec": 5.7929005623
+      },
+      "run": {
+        "requests": 504,
+        "request_bytes": 154326,
+        "response_bytes": 121203,
+        "total_bytes": 275529,
+        "retries": 0,
+        "median_elapsed_sec": 4.3247226477
+      },
+      "run_bootstrap": {
+        "requests": 0,
+        "request_bytes": 0,
+        "response_bytes": 0,
+        "total_bytes": 0,
+        "retries": 0,
+        "median_elapsed_sec": "NA"
+      },
+      "round_latency": {
+        "n_rounds": 168,
+        "median_round_wall_sec": 8.6111649275,
+        "p95_round_wall_sec": 8.9825917363
+      },
+      "timing_split": {
+        "n_rounds": 168,
+        "rounds_with_compute": 168,
+        "total_round_wall_sec": 741.8585727215,
+        "total_round_compute_wall_sec": 737.297,
+        "total_round_comm_overhead_wall_sec": 4.5615727215,
+        "comm_overhead_ratio": 0.0061488441183,
+        "compute_ratio": 0.99385115588
+      }
+    },
+    "communication_files.1": {
+      "csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/comm_metrics.csv",
+      "json": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/comm_metrics.json"
+    },
+    "timing_sequence.1": {
+      "step1_setup_sec": 0.17408895493,
+      "step2_init_sec": 5.8966474533,
+      "step2_broadcast_window_sec": 0.35836410522,
+      "step2_collect_barrier_sec": 0.37893247604,
+      "step2_exchange_sec": 5.159350872,
+      "step3_poll_total_sec": 1455.762160778,
+      "step3_round_wall_total_sec": 1452.7037465572,
+      "step3_poll_overhead_total_sec": 3.0584142208,
+      "step3_broadcast_total_sec": 742.4004116058,
+      "step3_collect_barrier_total_sec": 716.808478117,
+      "step3_exchange_compute_total_sec": 0,
+      "step3_compute_critical_total_sec": 737.297,
+      "step3_sync_wait_total_sec": 715.4067465572,
+      "step4_aggregate_total_sec": 0.087358951569,
+      "step5_optimizer_internal_sec": 0.39363884926,
+      "step3_5_total_sec": 1456.7784843445,
+      "step6_finalize_sec": 0.065111398697,
+      "total_runtime_sec": 1462.9570593834,
+      "n_eval_calls": 168,
+      "n_eval_records": 168,
+      "n_fn_calls": 84,
+      "n_gr_calls": 84,
+      "n_optimizer_iterations": 84,
+      "n_rounds": 168
+    },
+    "timing_files.1": {
+      "eval_csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_eval.csv",
+      "eval_site_csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_eval_site.csv",
+      "csv": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_steps.csv",
+      "json": "/project/results/runs/scenario1/standard/federated/scenario1/raw_runs/run_20260521-131333/timing_sequence.json"
+    }
+  }
+}

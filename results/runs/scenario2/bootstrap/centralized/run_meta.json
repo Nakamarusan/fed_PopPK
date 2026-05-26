@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-05-21 23:58:31",
+  "scenario": "scenario2",
+  "trial_start": 1,
+  "trial_end": 500,
+  "attempted": 500,
+  "converged": 497,
+  "model": "deferiprone oral 1-compartment base model; centralized pooled bootstrap",
+  "control": {
+    "outerOpt": "L-BFGS-B",
+    "maxOuterIterations": 100,
+    "lbfgsPgtol": 0.0,
+    "lbfgsFactr": 1000000000.0,
+    "covMethod": ""
+  }
+}

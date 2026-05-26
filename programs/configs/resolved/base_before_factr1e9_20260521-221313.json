@@ -1,0 +1,99 @@
+{
+  "modelInfo": {
+    "modelName": "deferiprone_1cmt_oral_base",
+    "administration": "po",
+    "iiv": {
+      "lcl": true,
+      "lvc": true,
+      "cor": true
+    },
+    "res": "prop",
+    "customModel": "function() {\n  ini({\n    lka <- log(9.13)\n    lcl <- log(8.3)\n    lvc <- log(18.7)\n    CcPropSd <- c(0.0003, 0.3)\n    etaLcl + etaLvc ~ c(0.086, 0.030, 0.086)\n  })\n  model({\n    ka <- exp(lka)\n    cl <- exp(lcl + etaLcl)\n    vc <- exp(lvc + etaLvc)\n    Cc <- linCmt() * 1000 / 139.15\n    Cc ~ prop(CcPropSd)\n  })\n}"
+  },
+  "initPar": {
+    "lka": 2.21156569460688,
+    "lcl": 2.11625551480255,
+    "lvc": 2.92852352386054,
+    "etaLcl": 0.086,
+    "(etaLcl,etaLvc)": 0.03,
+    "etaLvc": 0.086,
+    "CcPropSd": 0.3
+  },
+  "parameters": [
+    {
+      "name": "lka",
+      "init": 2.21156569460688,
+      "transform": "identity",
+      "role": "fixed"
+    },
+    {
+      "name": "lcl",
+      "init": 2.11625551480255,
+      "transform": "identity",
+      "role": "fixed"
+    },
+    {
+      "name": "lvc",
+      "init": 2.92852352386054,
+      "transform": "identity",
+      "role": "fixed"
+    },
+    {
+      "name": "CcPropSd",
+      "init": 0.3,
+      "lower": 0.0003,
+      "transform": "lower_exp",
+      "role": "residual"
+    }
+  ],
+  "omegaBlocks": [
+    {
+      "name": "omega_cl_v",
+      "etas": [
+        "etaLcl",
+        "etaLvc"
+      ],
+      "init": [
+        [
+          0.086,
+          0.03
+        ],
+        [
+          0.03,
+          0.086
+        ]
+      ],
+      "parameterization": "precision_chol"
+    }
+  ],
+  "lower": {
+    "lka": null,
+    "lcl": null,
+    "lvc": null,
+    "etaLcl": null,
+    "etaLvc": null,
+    "CcPropSd": 0.0003
+  },
+  "upper": {
+    "lka": null,
+    "lcl": null,
+    "lvc": null,
+    "etaLcl": null,
+    "etaLvc": null,
+    "CcPropSd": null
+  },
+  "optimControl": {
+    "method": "L-BFGS-B",
+    "return_grad": true,
+    "grad_cores": 3,
+    "maxit": 100,
+    "pgtol": 0.0,
+    "factr": 100000000.0,
+    "trace": 0
+  },
+  "foceiControl": {
+    "sdLowerFact": 0.001,
+    "diagOmegaBoundLower": 1,
+    "diagOmegaBoundUpper": 1
+  }
+}

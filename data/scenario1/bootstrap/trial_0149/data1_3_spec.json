@@ -1,0 +1,16 @@
+{
+  "facility_col": {},
+  "groups": [
+    {
+      "facility": {},
+      "resampled_ids": [10, 20, 94, 82, 20, 53, 23, 27, 64, 98, 65, 7, 65, 82, 24, 27, 53, 65, 78, 79, 60, 20, 98, 37, 27, 20, 23, 79, 14, 73]
+    }
+  ],
+  "original_nrow": 120,
+  "boot_nrow": 120,
+  "original_subjects": [
+    {
+      "n_subjects": 30
+    }
+  ]
+}

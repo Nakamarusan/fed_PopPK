@@ -1,0 +1,26 @@
+{
+  "scenario": "scenario2",
+  "assignment": {
+    "method": "Temperature-softened Mclust posterior assignment using generated individual WT with fixed site capacities",
+    "assignment_variable": "WT",
+    "true_wt_column": "WT",
+    "site_levels": [
+      "Site1",
+      "Site2",
+      "Site3"
+    ],
+    "site_counts": {
+      "Site1": 40,
+      "Site2": 30,
+      "Site3": 30
+    },
+    "component_means_ordered": [
+      13.8035338124,
+      17.3888566261,
+      20.5748254513
+    ],
+    "soft_temperature": 10,
+    "random_mix": 0,
+    "seed": 20260515
+  }
+}

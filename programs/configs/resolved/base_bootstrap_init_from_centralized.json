@@ -1,0 +1,43 @@
+{
+  "extends": [
+    "base.json"
+  ],
+  "initPar": {
+    "lka": 2.2564269797474,
+    "lcl": 2.17295807656151,
+    "lvc": 2.96734369337024,
+    "etaLcl": 0.104907498512821,
+    "(etaLcl,etaLvc)": 0.0639013320160262,
+    "etaLvc": 0.0404443691692501,
+    "CcPropSd": 0.359186797976028
+  },
+  "omegaBlocks": [
+    {
+      "name": "omega_cl_v",
+      "etas": [
+        "etaLcl",
+        "etaLvc"
+      ],
+      "init": [
+        [
+          0.104907498512821,
+          0.0639013320160262
+        ],
+        [
+          0.0639013320160262,
+          0.0404443691692501
+        ]
+      ],
+      "parameterization": "precision_chol"
+    }
+  ],
+  "optimControl": {
+    "method": "L-BFGS-B",
+    "return_grad": true,
+    "grad_cores": 3,
+    "maxit": 100,
+    "pgtol": 0,
+    "factr": 1000000000.0,
+    "trace": 0
+  }
+}

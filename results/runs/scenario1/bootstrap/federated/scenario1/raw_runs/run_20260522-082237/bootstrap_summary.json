@@ -1,0 +1,411 @@
+{
+  "schema": {
+    "schema_version": "1.1.0",
+    "generated_at": "2026-05-22T08:22:37Z",
+    "config_path": "/project/configs/../analysis/configs/resolved/scenario1_bootstrap.json",
+    "config_md5": "9d7556058a6c3cb18af9ad7ffdd7076b",
+    "seed": 4869,
+    "host": "ac61866b7741",
+    "pid": 1,
+    "image_tag": null,
+    "git_sha": null,
+    "git_dirty": null
+  },
+  "aggregation": {
+    "ci_method": "percentile",
+    "ci_level": 0.95,
+    "quantile_type": 7,
+    "estimates_scale": "natural"
+  },
+  "summary": [
+    {
+      "parameter": "(etaLcl,etaLvc)",
+      "median": 0.057538707459,
+      "p2.5": 0.04802905253,
+      "p97.5": 0.089600622555
+    },
+    {
+      "parameter": "CcPropSd",
+      "median": 0.3608999775,
+      "p2.5": 0.33416464042,
+      "p97.5": 0.38147537782
+    },
+    {
+      "parameter": "etaLcl",
+      "median": 0.11989187993,
+      "p2.5": 0.077759840008,
+      "p97.5": 0.13478518266
+    },
+    {
+      "parameter": "etaLvc",
+      "median": 0.036698460505,
+      "p2.5": 0.026943743107,
+      "p97.5": 0.065482322038
+    },
+    {
+      "parameter": "lcl",
+      "median": 2.1543176304,
+      "p2.5": 2.1354165834,
+      "p97.5": 2.1937584731
+    },
+    {
+      "parameter": "lka",
+      "median": 2.2548938795,
+      "p2.5": 2.1079237405,
+      "p97.5": 2.3575309504
+    },
+    {
+      "parameter": "lvc",
+      "median": 2.9643395917,
+      "p2.5": 2.9268366484,
+      "p97.5": 3.0089409313
+    },
+    {
+      "parameter": "rho_(etaLcl,etaLvc)",
+      "median": 0.97914152316,
+      "p2.5": 0.97192332342,
+      "p97.5": 0.98810417737
+    }
+  ],
+  "runs": [
+    {
+      "tag": "trial_341_20260522-082237",
+      "value": 2246.54,
+      "counts": [18, 18],
+      "control": {
+        "maxit": 100,
+        "factr": 1000000000,
+        "pgtol": 0,
+        "trace": 0,
+        "method": "L-BFGS-B"
+      },
+      "convergence": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "nat_par": {
+        "lka": 2.2224275,
+        "lcl": 2.1396470513,
+        "lvc": 2.9271782429,
+        "CcPropSd": 0.37857663071,
+        "etaLcl": 0.075944464154,
+        "etaLvc": 0.030939865316,
+        "(etaLcl,etaLvc)": 0.047281002818,
+        "rho_(etaLcl,etaLvc)": 0.97539249293
+      },
+      "failed_clients": [],
+      "attempt": 1,
+      "files": {
+        "result": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_341_20260522-082237.json",
+        "trace": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_341_20260522-082237.csv",
+        "final": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_341_20260522-082237.csv"
+      },
+      "log_n": 18,
+      "execution_state": "completed",
+      "trial": 341,
+      "attempts": 1
+    },
+    {
+      "tag": "trial_342_20260522-082453",
+      "value": 2264.2461,
+      "counts": [24, 24],
+      "control": {
+        "maxit": 100,
+        "factr": 1000000000,
+        "pgtol": 0,
+        "trace": 0,
+        "method": "L-BFGS-B"
+      },
+      "convergence": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "nat_par": {
+        "lka": 2.3679643166,
+        "lcl": 2.1543176304,
+        "lvc": 2.9643395917,
+        "CcPropSd": 0.38179746083,
+        "etaLcl": 0.12461057859,
+        "etaLvc": 0.066480609625,
+        "(etaLcl,etaLvc)": 0.089953026615,
+        "rho_(etaLcl,etaLvc)": 0.9883046246
+      },
+      "failed_clients": [],
+      "attempt": 1,
+      "files": {
+        "result": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_342_20260522-082453.json",
+        "trace": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_342_20260522-082453.csv",
+        "final": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_342_20260522-082453.csv"
+      },
+      "log_n": 24,
+      "execution_state": "completed",
+      "trial": 342,
+      "attempts": 1
+    },
+    {
+      "tag": "trial_343_20260522-082756",
+      "value": 2214.7824,
+      "counts": [37, 37],
+      "control": {
+        "maxit": 100,
+        "factr": 1000000000,
+        "pgtol": 0,
+        "trace": 0,
+        "method": "L-BFGS-B"
+      },
+      "convergence": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "nat_par": {
+        "lka": 2.2548938795,
+        "lcl": 2.1968118011,
+        "lvc": 3.0090246159,
+        "CcPropSd": 0.34122369637,
+        "etaLcl": 0.13591569422,
+        "etaLvc": 0.056497733751,
+        "(etaLcl,etaLvc)": 0.086428986017,
+        "rho_(etaLcl,etaLvc)": 0.98630015234
+      },
+      "failed_clients": [],
+      "attempt": 1,
+      "files": {
+        "result": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_343_20260522-082756.json",
+        "trace": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_343_20260522-082756.csv",
+        "final": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_343_20260522-082756.csv"
+      },
+      "log_n": 36,
+      "execution_state": "completed",
+      "trial": 343,
+      "attempts": 1
+    },
+    {
+      "tag": "trial_344_20260522-083229",
+      "value": 2215.5432,
+      "counts": [24, 24],
+      "control": {
+        "maxit": 100,
+        "factr": 1000000000,
+        "pgtol": 0,
+        "trace": 0,
+        "method": "L-BFGS-B"
+      },
+      "convergence": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "nat_par": {
+        "lka": 2.2636306542,
+        "lcl": 2.166278521,
+        "lvc": 3.0081877704,
+        "CcPropSd": 0.33338030087,
+        "etaLcl": 0.11989187993,
+        "etaLvc": 0.026499729529,
+        "(etaLcl,etaLvc)": 0.054761499938,
+        "rho_(etaLcl,etaLvc)": 0.97153786015
+      },
+      "failed_clients": [],
+      "attempt": 1,
+      "files": {
+        "result": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_344_20260522-083229.json",
+        "trace": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_344_20260522-083229.csv",
+        "final": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_344_20260522-083229.csv"
+      },
+      "log_n": 24,
+      "execution_state": "completed",
+      "trial": 344,
+      "attempts": 1
+    },
+    {
+      "tag": "trial_345_20260522-083531",
+      "value": 2238.5566,
+      "counts": [18, 18],
+      "control": {
+        "maxit": 100,
+        "factr": 1000000000,
+        "pgtol": 0,
+        "trace": 0,
+        "method": "L-BFGS-B"
+      },
+      "convergence": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "nat_par": {
+        "lka": 2.0952011005,
+        "lcl": 2.1349465314,
+        "lvc": 2.9267986935,
+        "CcPropSd": 0.3608999775,
+        "etaLcl": 0.094098222691,
+        "etaLvc": 0.036698460505,
+        "(etaLcl,etaLvc)": 0.057538707459,
+        "rho_(etaLcl,etaLvc)": 0.97914152316
+      },
+      "failed_clients": [],
+      "attempt": 1,
+      "files": {
+        "result": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_345_20260522-083531.json",
+        "trace": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_345_20260522-083531.csv",
+        "final": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_345_20260522-083531.csv"
+      },
+      "log_n": 18,
+      "execution_state": "completed",
+      "trial": 345,
+      "attempts": 1
+    }
+  ],
+  "trial_status": [
+    {
+      "trial": 341,
+      "execution_state": "completed",
+      "converged": true,
+      "attempts": 1,
+      "convergence": 0,
+      "value": 2246.54,
+      "eval_fn": 18,
+      "eval_gr": 18,
+      "log_n": 18,
+      "failed_clients_n": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "result_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_341_20260522-082237.json",
+      "trace_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_341_20260522-082237.csv",
+      "final_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_341_20260522-082237.csv"
+    },
+    {
+      "trial": 342,
+      "execution_state": "completed",
+      "converged": true,
+      "attempts": 1,
+      "convergence": 0,
+      "value": 2264.2461,
+      "eval_fn": 24,
+      "eval_gr": 24,
+      "log_n": 24,
+      "failed_clients_n": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "result_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_342_20260522-082453.json",
+      "trace_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_342_20260522-082453.csv",
+      "final_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_342_20260522-082453.csv"
+    },
+    {
+      "trial": 343,
+      "execution_state": "completed",
+      "converged": true,
+      "attempts": 1,
+      "convergence": 0,
+      "value": 2214.7824,
+      "eval_fn": 37,
+      "eval_gr": 37,
+      "log_n": 36,
+      "failed_clients_n": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "result_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_343_20260522-082756.json",
+      "trace_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_343_20260522-082756.csv",
+      "final_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_343_20260522-082756.csv"
+    },
+    {
+      "trial": 344,
+      "execution_state": "completed",
+      "converged": true,
+      "attempts": 1,
+      "convergence": 0,
+      "value": 2215.5432,
+      "eval_fn": 24,
+      "eval_gr": 24,
+      "log_n": 24,
+      "failed_clients_n": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "result_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_344_20260522-083229.json",
+      "trace_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_344_20260522-083229.csv",
+      "final_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_344_20260522-083229.csv"
+    },
+    {
+      "trial": 345,
+      "execution_state": "completed",
+      "converged": true,
+      "attempts": 1,
+      "convergence": 0,
+      "value": 2238.5566,
+      "eval_fn": 18,
+      "eval_gr": 18,
+      "log_n": 18,
+      "failed_clients_n": 0,
+      "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+      "result_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_result_trial_345_20260522-083531.json",
+      "trace_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/optim_trace_trial_345_20260522-083531.csv",
+      "final_file": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/final_params_trial_345_20260522-083531.csv"
+    }
+  ],
+  "info": {
+    "run_id": "20260522-082237",
+    "log_base_dir": "/project/results/runs/scenario1/bootstrap/federated",
+    "scenario": "scenario1/raw_runs",
+    "total_trials": 5,
+    "successes": 5,
+    "failures": 0,
+    "nonconverged_count": 0,
+    "nonconverged_trials": [],
+    "convergence_missing_count": 0,
+    "seed_base": 4869,
+    "B_per_client": 500,
+    "duration_sec": 918.5842592716,
+    "host": "ac61866b7741",
+    "image_tag": null,
+    "communication": {
+      "generated_at": "2026-05-22T08:37:50Z",
+      "totals": {
+        "requests": 723,
+        "request_bytes": 806259,
+        "response_bytes": 183243,
+        "total_bytes": 989502,
+        "retries": 0
+      },
+      "init": {
+        "requests": 3,
+        "request_bytes": 8139,
+        "response_bytes": 1161,
+        "total_bytes": 9300,
+        "retries": 0,
+        "median_elapsed_sec": 0.36435031891
+      },
+      "init_round_latency": {
+        "n_rounds": 1,
+        "median_round_wall_sec": 0.38961839676,
+        "p95_round_wall_sec": 0.38961839676
+      },
+      "run": {
+        "requests": 0,
+        "request_bytes": 0,
+        "response_bytes": 0,
+        "total_bytes": 0,
+        "retries": 0,
+        "median_elapsed_sec": "NA"
+      },
+      "run_bootstrap": {
+        "requests": 720,
+        "request_bytes": 798120,
+        "response_bytes": 182082,
+        "total_bytes": 980202,
+        "retries": 0,
+        "median_elapsed_sec": 3.6437259912
+      },
+      "round_latency": {
+        "n_rounds": 240,
+        "median_round_wall_sec": 3.7662864923,
+        "p95_round_wall_sec": 4.0220900178
+      },
+      "timing_split": {
+        "n_rounds": 240,
+        "rounds_with_compute": 240,
+        "total_round_wall_sec": 907.6998870373,
+        "total_round_compute_wall_sec": 899.7339,
+        "total_round_comm_overhead_wall_sec": 7.9659870373,
+        "comm_overhead_ratio": 0.0087760141331,
+        "compute_ratio": 0.99122398587
+      }
+    },
+    "communication_files": {
+      "csv": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/comm_metrics.csv",
+      "json": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/comm_metrics.json"
+    },
+    "output_files": {
+      "bootstrap_summary_csv": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/bootstrap_summary.csv",
+      "bootstrap_summary_json": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/bootstrap_summary.json",
+      "trial_status_csv": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/trial_status.csv",
+      "failed_trials_csv": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/failed_trials.csv",
+      "trial_estimates_wide_csv": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/trial_estimates_wide.csv",
+      "trial_estimates_long_csv": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/trial_estimates_long.csv",
+      "result_json": "/project/results/runs/scenario1/bootstrap/federated/scenario1/raw_runs/run_20260522-082237/result.json"
+    }
+  }
+}

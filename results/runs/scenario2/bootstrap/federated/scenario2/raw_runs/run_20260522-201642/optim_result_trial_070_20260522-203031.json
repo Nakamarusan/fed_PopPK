@@ -1,0 +1,52 @@
+{
+  "par": [2.3974126754, 2.238367847, 3.0175866234, 0.33586793433, 0.10565344909, 0.03644298236, 0.060748850087, 0.9790148211],
+  "value": 2174.0247,
+  "counts": [21, 21],
+  "convergence": 0,
+  "message": "CONVERGENCE: REL_REDUCTION_OF_F <= FACTR*EPSMCH",
+  "control": {
+    "maxit": 100,
+    "factr": 1000000000,
+    "pgtol": 0,
+    "trace": 0,
+    "method": "L-BFGS-B"
+  },
+  "log": {},
+  "meta": {
+    "run_id": "20260522-201642",
+    "log_csv": "/project/results/runs/scenario2/bootstrap/federated/scenario2/raw_runs/run_20260522-201642/iter_log.csv",
+    "client_log_csv": null
+  },
+  "par_internal": {
+    "lka": 2.3974126754,
+    "lcl": 2.238367847,
+    "lvc": 3.0175866234,
+    "CcPropSd": -1.0919308563,
+    "pchol__omega_cl_v__etaLcl__etaLcl": 3.8854260673,
+    "pchol__omega_cl_v__etaLcl__etaLvc": -25.1652616264,
+    "pchol__omega_cl_v__etaLvc__etaLvc": 2.2887403294
+  },
+  "par_nat": [2.3974126754, 2.238367847, 3.0175866234, 0.33586793433, 0.10565344909, 0.03644298236, 0.060748850087, 0.9790148211],
+  "parNat": {
+    "lka": 2.3974126754,
+    "lcl": 2.238367847,
+    "lvc": 3.0175866234,
+    "CcPropSd": 0.33586793433,
+    "etaLcl": 0.10565344909,
+    "etaLvc": 0.03644298236,
+    "(etaLcl,etaLvc)": 0.060748850087,
+    "rho_(etaLcl,etaLvc)": 0.9790148211
+  },
+  "schema": {
+    "schema_version": "1.1.0",
+    "generated_at": "2026-05-22T20:16:42Z",
+    "config_path": "/project/configs/../analysis/configs/resolved/scenario2_bootstrap.json",
+    "config_md5": "67e6a296d3935d620e746ed6160f8ca2",
+    "seed": 4869,
+    "host": "5f73615e31ed",
+    "pid": 1,
+    "image_tag": null,
+    "git_sha": null,
+    "git_dirty": null
+  }
+}

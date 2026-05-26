@@ -1,0 +1,84 @@
+{
+  "release_name": "deferiprone_single_oral_25mgkg_main_20260521",
+  "materialized_at_utc": "2026-05-25T04:32:42.652891+00:00",
+  "source_workspace": "temp/deferiprone_single_oral_25mgkg_designcheck_20260511/validation/design_change_n403030_wtmclustT10_nomix_site403030_nondesignquota_precisionchol_basefitbootinit_preboot_20260521",
+  "source_project": "temp/deferiprone_single_oral_25mgkg_designcheck_20260511",
+  "git_commit": "efaf803783b6cd655d9cff1980f6453a71bee1df",
+  "include_runtime_cache": true,
+  "figures_tables_outputs": [
+    "figure1",
+    "figure2",
+    "figure3",
+    "supplement1",
+    "supplement2",
+    "supplement3",
+    "table1",
+    "table2",
+    "table3"
+  ],
+  "copied_groups": {
+    "program_entrypoints": [
+      "generate_data_and_plot.R",
+      "run_generate_and_plot.sh",
+      "run_prebootstrap_base.sh",
+      "run_base_centralized_fit.R",
+      "run_standard_federated.sh",
+      "run_standard_nonfederated.sh",
+      "materialize_bootstrap_trials.R",
+      "materialize_bootstrap_trials.sh",
+      "run_pooled_bootstrap.R",
+      "run_pooled_bootstrap.sh",
+      "run_bootstrap_chunked.sh",
+      "launch_federated_bootstrap_precisionchol_20260522.sh",
+      "rerun_missing_centralized_bootstrap.sh",
+      "evaluate_federated_pooled_metrics.R",
+      "format_federated_outputs.R",
+      "materialize_prebootstrap_report.R",
+      "materialize_reports.R",
+      "materialize_reports_figures.R",
+      "materialize_scenario_dv_time_plots.R",
+      "materialize_supplementary.R",
+      "materialize_table3_bootstrap_results.R",
+      "materialize_figure3_scenario_rows.R"
+    ],
+    "program_configs": "programs/configs",
+    "program_manifests": "programs/manifests",
+    "program_checks": "programs/checks",
+    "code": [
+      "R",
+      "apps",
+      "configs",
+      "compose",
+      "docker",
+      "Dockerfile.base",
+      "renv.lock",
+      ".Rprofile"
+    ],
+    "data": "data",
+    "results": [
+      "results/runs",
+      "results/cache",
+      "results/reports"
+    ],
+    "figures_tables": "figures_tables"
+  },
+  "file_counts": {
+    "data": 7027,
+    "results_runs": 7025,
+    "results_cache": 12006,
+    "figures_tables": 31
+  },
+  "size_bytes": {
+    "data": 11716624,
+    "results_runs": 86114932,
+    "results_cache": 4654134,
+    "figures_tables": 7023115,
+    "bundle_total": 147853542
+  },
+  "checksums_sha256": {
+    "programs/manifests/generation_meta.json": "cc2b69cf334da416551f7e65c662b0d5a7c81702178937b9ac744b56511b9d6b",
+    "figures_tables/table3/table3.csv": "a1ddadd64309b44846cff0d8be84538c09962e677c925c402facb1903e238e89",
+    "figures_tables/table2/table2.csv": "07bca32279013b373fcf90c9d1b7b46569d377076f7de2f117f93ff666d571a0",
+    "figures_tables/table1/table1.csv": "55aa9704fa05ee1ede27982f672d9c30d8d693b6535138f8d08706d9101b3da4"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "base.json"
+  ],
+  "clients": {
+    "http://client1:8000": "/project/data/scenario2/base/data1_1.csv",
+    "http://client2:8000": "/project/data/scenario2/base/data1_2.csv",
+    "http://client3:8000": "/project/data/scenario2/base/data1_3.csv"
+  },
+  "logging": {
+    "base_dir": "/project/results/runs/scenario2/standard/federated",
+    "scenario": "scenario2/raw_runs",
+    "save_par_log": true
+  },
+  "optimControl": {
+    "factr": 1000000000.0,
+    "maxit": 100,
+    "pgtol": 0
+  }
+}

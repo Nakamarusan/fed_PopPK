@@ -1,0 +1,5 @@
+{
+  "title": "Figure 1. Sequence diagram of the federated framework",
+  "artifacts": ["figure1.pdf", "figure1.svg", "notes.md"],
+  "sources": "reports/figures/figure1_federated_framework_sequence_diagram.pdf"
+}
