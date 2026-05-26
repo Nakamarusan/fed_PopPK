@@ -13,11 +13,6 @@ This repository contains the data, code, configurations, and analysis outputs fo
 - `results/`: disclosed centralized and federated analysis outputs.
 - `figures_tables/`: manuscript-facing tables and figures.
 
-For the main reported outputs, start with `figures_tables/`. For a minimal executable check, use `programs/entrypoints/demo_docker.sh`.
-Manuscript outputs are named by number only: `figure1`-`figure3`, `supplement1`-`supplement3`, and `table1`-`table3`.
-
-This root README is the only README file in the repository; per-directory README files are intentionally omitted.
-
 ## Requirements
 
 - Docker
