@@ -4,7 +4,7 @@ Federated Estimation for Population Pharmacokinetic Models with Exact Equivalenc
 
 Yuta Nakamaru, Mizuki Uno, Yiran Song, Kanako So, Tomoko Kita, Fumiyoshi Yamashita
 
-This repository contains the data, code, configurations, and analysis outputs for the deferiprone population pharmacokinetic analysis reported in the manuscript.
+This repository contains the data, code, configurations, and analysis outputs for the Federated PopPK analysis reported in the manuscript.
 
 ## Repository Structure
 
