@@ -1,6 +1,6 @@
 # Data and Code
 
-Nakamaru Y, Uno M, Song Y, So K, Kita T, Yamashita F. Federated Estimation of Population Pharmacokinetic Models with Exact Equivalence to Pooled-Data Analysis. Pharm Res. 2026 Sep 17. doi: 10.1007/s11095-026-04203-3. Epub ahead of print. PMID: 42754782.
+Nakamaru Y, Uno M, Song Y, So K, Kita T, Yamashita F. Federated Estimation of Population Pharmacokinetic Models with Exact Equivalence to Pooled-Data Analysis. Pharm Res. 2026 Sep;43(9):2957-2966. doi: 10.1007/s11095-026-04203-3. Epub 2026 Sep 17. PMID: 42754782.
 
 This repository contains the data, code, configurations, and analysis outputs for the Federated PopPK analysis reported in the manuscript.
 
